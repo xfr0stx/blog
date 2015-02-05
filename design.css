@@ -1,0 +1,15 @@
+h1 {
+	font-size: 4em;
+	text-align: center;
+	}
+h1, h2, h3 {
+	font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	font-weight: bold;
+	}
+body {
+	font-size: 62.5%; /* Resets 1em to 10px */
+	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	background: #d5d6d7 url('images/kubrickbgcolor.jpg');
+	color: #333;
+	text-align: center;
+	}
