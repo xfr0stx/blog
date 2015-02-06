@@ -2,12 +2,13 @@
 include_once "db/dbcon.php";
 
 $escaped_email = mysqli_real_escape_string($con,$_POST["email"]);
-$escaped_passwort = mysqli_real_escape_string($con,$_POST["passwort"]);
+#$escaped_passwort = mysqli_real_escape_string($con,$_POST["passwort"]);
+$userpass = $_POST["passwort"];
 $escaped_geburtsdatum= mysqli_real_escape_string($con,$_POST["geburtsdatum"]);
 
-#$userpass = $hashedpw = hash('sha512',$escaped_passwort);
+$hashedpw = hash('sha512',$userpass);
 
-$sql = "INSERT INTO user(email,passwort,geburtsdatum) VALUES ('$escaped_email','$escaped_passwort' ,'$escaped_geburtsdatum')";
+$sql = "INSERT INTO user(email,passwort,geburtsdatum) VALUES ('$escaped_email','$userpass' ,'$escaped_geburtsdatum')";
 $abfrage =mysqli_query($con,$sql);
 
 ?>

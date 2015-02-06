@@ -3,8 +3,7 @@ include_once "db/dbcon.php";
 
 $email = $_POST["email"];
 $userpass = $_POST["passwort"];
-#$escaped_passwort = mysqli_real_escape_string($con,$_POST["passwort"]);
-#$userpass = $hashedpw = hash('sha512',$escaped_passwort);
+#$hashedpw = hash('sha512',$userpass);
 
 
 
@@ -16,7 +15,6 @@ $abfrage =mysqli_query($con,$sql);
    session_start();
    $_SESSION["loginOK"] =true;
    $_SESSION_["idUser"] = $row->idUser;
-   echo "Ok, darfst rein!";
   header("Location: blog.php"); 
  }
  
