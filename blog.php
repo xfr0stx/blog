@@ -37,10 +37,12 @@ and open the template in the editor.
         echo '<br>';
         #echo '<table align ="center" border="2">';
         while($fetch= mysqli_fetch_assoc($abfrage)){
-            echo '<div>';
-            echo '<h2>'.$fetch['titel'].'</h1>';
+            echo '<div style="text-align: justify;">';
+            echo '<h2>'.$fetch['titel'].'</h2>';
             echo '<p>Posted am: '.$fetch['eintragdatum'].'</p>';
-            echo '<p>'.$fetch['eintrag'].'</p>';
+            echo '<table border="1" align="center" width=30%>';
+            echo '<tr><td valign="top"><p>'.$fetch['eintrag'].'</p></td></tr>';
+            echo '</table>';
             echo '</div>';
         }
         echo '</table>';
