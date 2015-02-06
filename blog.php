@@ -27,7 +27,7 @@ and open the template in the editor.
         <a href="logout.php">Logout!</a>
         <?php
         include_once "db/dbcon.php";
-        $sql ="SELECT eintrag FROM eintrag";
+        $sql ="SELECT titel,eintrag,eintragdatum FROM eintrag";
         
         $abfrage =mysqli_query($con,$sql);
        ?>
@@ -35,11 +35,13 @@ and open the template in the editor.
         <?php
         echo '<br>';
         echo '<br>';
-        echo '<table align ="center" border="2">';
+        #echo '<table align ="center" border="2">';
         while($fetch= mysqli_fetch_assoc($abfrage)){
-            echo '<tr>';
-            echo'<td align="center">',$fetch['eintrag'], '</td>';
-            echo '</tr>';
+            echo '<div>';
+            echo '<h2>'.$fetch['titel'].'</h1>';
+            echo '<p>Posted am: '.$fetch['eintragdatum'].'</p>';
+            echo '<p>'.$fetch['eintrag'].'</p>';
+            echo '</div>';
         }
         echo '</table>';
         ?>

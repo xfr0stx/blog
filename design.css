@@ -2,10 +2,15 @@ h1 {
 	font-size: 4em;
 	text-align: center;
 	}
-h1, h2, h3 {
+h1, h3 {
 	font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
 	font-weight: bold;
 	}
+h2 {
+	font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	font-size: 3em;
+        text-align: center;
+    }
 body {
 	font-size: 62.5%; /* Resets 1em to 10px */
 	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
