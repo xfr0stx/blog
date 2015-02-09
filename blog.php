@@ -42,8 +42,8 @@ if ($_SESSION["loginOK"] != true) {
             while ($fetch = mysqli_fetch_assoc($abfrage)) {
                 echo '<div style="text-align: justify;">';
                 echo '<h2>' . $fetch['titel'] . '</h2>';
-                echo '<p>Posted am: ' . $fetch['eintragdatum'] . '.</p>';
-                echo '<p>von: ' . $fetch['email'] . '</p>';
+                echo '<p align="center">Posted am: ' . $fetch['eintragdatum'] . '.</p>';
+                echo '<p align="center">von: ' . $fetch['email'] . '</p>';
                 echo '<table border="1" align="center" width=30%>';
                 echo '<tr><td valign="top"><p>' . $fetch['eintrag'] . '</p></td></tr>';
                 echo '<tr><td align="right"><p>' . '<a href="%kommentar%.php/">[Kommentar]</a>' . '</p></td></tr>';
