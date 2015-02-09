@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<!-- Der Benutzer wird regsitriert, also in die DB eingetragen und 
+erhält eine Bestätigung der registrierung.
+-->
 <?php
 include_once "db/dbcon.php";
 

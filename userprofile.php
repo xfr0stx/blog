@@ -1,4 +1,7 @@
-    <?php
+<!DOCTYPE html>   
+<!--  Die Benutzerdaten werden angezeigt und können aktualisiert werden.
+-->
+ <?php
     session_start();
     if($_SESSION["loginOK"]!=true){
         header("Location: index.php");
