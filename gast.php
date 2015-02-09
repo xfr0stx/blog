@@ -19,11 +19,6 @@ and open the template in the editor.
     </head>
     <body>
         <h1>Your in! Welcome to the Bl0gster</h1>
-          <form action="eintrag_posten.php" method="POST">
-              Title <input type="text" size="20" value="" name="titel"><br><br>
-              Beitrag<br> <textarea name="eintrag" cols="50" rows="10" value="" style="width: 621px; height: 186px;;"></textarea> <br>
-            <input type="submit" value="Posten!">
-        </form>
         <a href="logout.php">Logout!</a>
         <?php
         include_once "db/dbcon.php";

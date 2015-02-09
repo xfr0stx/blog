@@ -13,9 +13,10 @@ and open the template in the editor.
     <body>
         <h1>DelaCom's | IT-Blog</h1><br>
         Bitte melden Sie sich an um einen Eintrag zu posten:
+        <p>Gäste haben nur Lesezugang (User:gast - PW:gast)!</p>
         <form action="login.php" method="POST">
-           E-Mail <input type="text" size="20" value="" name="email"><br><br>
-           Passwort <input type="Password" size="20" value="" name="passwort"><br>
+           E-Mail: <input type="text" size="20" value="" name="email" required><br><br>
+           Passwort: <input type="Password" size="20" value="" name="passwort" required ><br>
             <input type="submit" value="Senden">
         </form>
         <a href="register.php">Registrieren</a>

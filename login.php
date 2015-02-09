@@ -10,6 +10,14 @@ $userpass = $_POST["passwort"];
 $sql = "SELECT email,passwort FROM blog.user WHERE email=\"$email\" AND passwort=$userpass";
 $abfrage =mysqli_query($con,$sql);
 
+if(($_POST["email"]=="gast") && ($userpass = $_POST["passwort"]=="gast"))
+{session_start();
+   $_SESSION["loginOK"] =true;
+   $_SESSION_["idUser"] = $row->idUser;
+  header("Location: gast.php"); 
+}
+else{
+        
  if($abfrage->num_rows>=1)
  {
    session_start();
@@ -21,5 +29,5 @@ $abfrage =mysqli_query($con,$sql);
  else{
 
     header("Location: index.php");
-}
+}}
 ?>
