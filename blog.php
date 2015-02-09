@@ -24,7 +24,8 @@ and open the template in the editor.
               Beitrag<br> <textarea name="eintrag" cols="50" rows="10" value="" style="width: 621px; height: 186px;;"></textarea> <br>
             <input type="submit" value="Posten!">
         </form>
-        <a href="logout.php">Logout!</a>
+        <a href="logout.php">Logout!</a><br>
+        <a href="userprofile.php">UserProfile bearbeiten!</a>
         <?php
         include_once "db/dbcon.php";
         $sql ="SELECT titel,eintrag,eintragdatum FROM eintrag";
