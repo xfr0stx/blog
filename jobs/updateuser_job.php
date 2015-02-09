@@ -2,16 +2,15 @@
 <?php
 include_once "db/dbcon.php";
 
-$escaped_email = mysqli_real_escape_string($con,$_POST["email"]);
+$escaped_email = mysqli_real_escape_string($con, $_POST["email"]);
 #$escaped_passwort = mysqli_real_escape_string($con,$_POST["passwort"]);
 $userpass = $_POST["passwort"];
-$escaped_geburtsdatum= mysqli_real_escape_string($con,$_POST["geburtsdatum"]);
-$convertdate=implode("-", array_reverse(explode('.', $escaped_geburtsdatum)));
-$hashedpw = hash('sha512',$userpass);
+$escaped_geburtsdatum = mysqli_real_escape_string($con, $_POST["geburtsdatum"]);
+$convertdate = implode("-", array_reverse(explode('.', $escaped_geburtsdatum)));
+$hashedpw = hash('sha512', $userpass);
 
 $sql = "UPDATE blog.user SET geburtsdatum=$escaped_geburtsdatum email=$escaped_email passwort=$userpass WHERE iduser=21";
-$abfrage =mysqli_query($con,$sql);
-
+$abfrage = mysqli_query($con, $sql);
 ?>
 
 <html>
