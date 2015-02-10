@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!DOCTYPE html>   
 <!--  Die Benutzerdaten werden angezeigt und können aktualisiert werden.
 -->
@@ -48,6 +49,8 @@
     
     ?>
 =======
+=======
+>>>>>>> origin/master
 <!DOCTYPE html>
 <!--  Die Benutzerdaten werden angezeigt und können aktualisiert werden.
 -->
@@ -92,5 +95,9 @@ if ($_SESSION["loginOK"] != true) {
     </html>
     <?php
 }
+<<<<<<< HEAD
+?>
+>>>>>>> origin/master
+=======
 ?>
 >>>>>>> origin/master

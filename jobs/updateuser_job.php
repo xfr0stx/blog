@@ -2,6 +2,7 @@
 <?php
 include_once "db/dbcon.php";
 
+<<<<<<< HEAD:jobs/updateuser_job.php
 <<<<<<< HEAD:updateuser_job.php
 $escaped_email = mysqli_real_escape_string($con,$_POST["email"]);
 #$escaped_passwort = mysqli_real_escape_string($con,$_POST["passwort"]);
@@ -14,6 +15,8 @@ $sql = "UPDATE blog.user SET geburtsdatum=$escaped_geburtsdatum email=$escaped_e
 $abfrage =mysqli_query($con,$sql);
 
 =======
+=======
+>>>>>>> origin/master:jobs/updateuser_job.php
 $escaped_email = mysqli_real_escape_string($con, $_POST["email"]);
 #$escaped_passwort = mysqli_real_escape_string($con,$_POST["passwort"]);
 $userpass = $_POST["passwort"];
@@ -23,6 +26,9 @@ $hashedpw = hash('sha512', $userpass);
 
 $sql = "UPDATE blog.user SET geburtsdatum=$escaped_geburtsdatum email=$escaped_email passwort=$userpass WHERE iduser=21";
 $abfrage = mysqli_query($con, $sql);
+<<<<<<< HEAD:jobs/updateuser_job.php
+>>>>>>> origin/master:jobs/updateuser_job.php
+=======
 >>>>>>> origin/master:jobs/updateuser_job.php
 ?>
 

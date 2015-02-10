@@ -13,7 +13,11 @@ Hier können sich Benutzer und Gäste einloggen und ggf. neu Registrieren
         Bitte melden Sie sich an um einen Eintrag zu posten:
         <p>Gäste haben nur Lesezugang (User:gast - PW:gast)!</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <form action="login.php" method="POST">
+=======
+        <form action="./jobs/login.php" method="POST">
+>>>>>>> origin/master
 =======
         <form action="./jobs/login.php" method="POST">
 >>>>>>> origin/master

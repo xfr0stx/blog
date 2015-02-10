@@ -2,6 +2,7 @@
 <?php
 session_start();
 <<<<<<< HEAD
+<<<<<<< HEAD
 if($_SESSION["loginOK"]!=true){
     header("Location: index.php");
 }else{
@@ -59,6 +60,8 @@ and open the template in the editor.
 }
     ?>
 =======
+=======
+>>>>>>> origin/master
 if ($_SESSION["loginOK"] != true) {
     header("Location: index.php");
 } else {
@@ -116,5 +119,8 @@ if ($_SESSION["loginOK"] != true) {
     <?php
 }
 ?>
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 

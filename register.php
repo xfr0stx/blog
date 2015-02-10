@@ -12,7 +12,11 @@ das Geburtsdatum wird auf vollständigkeit gerpüft.
         <h1>Regstriere dich!</h1><br>
         Bitte vervollständige die folgenden Einträge:
 <<<<<<< HEAD
+<<<<<<< HEAD
         <form action="register_job.php" method="POST">
+=======
+        <form action="./jobs/register_job.php" method="POST">
+>>>>>>> origin/master
 =======
         <form action="./jobs/register_job.php" method="POST">
 >>>>>>> origin/master
