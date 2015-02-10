@@ -18,7 +18,7 @@ if($_SESSION["loginOK"]!=true){
         <?php
         
        include_once "./db/dbcon.php";
-       $sql = "SELECT eintrag.titel,eintrag.eintrag,eintrag.eintragdatum,user.email FROM eintrag JOIN user ON eintrag.user_idUser = user.idUser";
+       $sql = "SELECT ideintrag, eintrag.titel,eintrag.eintrag,eintrag.eintragdatum,user.email FROM eintrag JOIN user ON eintrag.user_idUser = user.idUser ORDER BY eintrag.ideintrag  DESC";
        $abfrage =mysqli_query($con,$sql);
       
         

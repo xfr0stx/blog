@@ -29,15 +29,13 @@ if ($_SESSION["loginOK"] != true) {
             <a href="userprofile.php">UserProfile bearbeiten!</a>
             <?php
             include_once "db/dbcon.php";
-            $sql = "SELECT eintrag.titel,eintrag.eintrag,eintrag.eintragdatum,user.email FROM eintrag JOIN user ON eintrag.user_idUser = user.idUser";
+            $sql = "SELECT ideintrag, eintrag.titel,eintrag.eintrag,eintrag.eintragdatum,user.email FROM eintrag JOIN user ON eintrag.user_idUser = user.idUser ORDER BY eintrag.ideintrag  DESC";
             $abfrage = mysqli_query($con, $sql);
             ?>
 
             <?php
             echo '<br>';
             echo '<br>';
-            #var_dump($_SESSION['usersession']);
-            #echo '<table align ="center" border="2">';
             while ($fetch = mysqli_fetch_assoc($abfrage)) {
                 echo '<div style="text-align: justify;">';
                 echo '<h2>' . $fetch['titel'] . '</h2>';
@@ -49,7 +47,6 @@ if ($_SESSION["loginOK"] != true) {
                 echo '</table>';
                 echo '</div>';
             }
-            echo '</table>';
             ?>
 
         </body>
