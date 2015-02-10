@@ -20,7 +20,7 @@ $abfrage = mysqli_query($con, $sql);
 if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {
     session_start();
     $_SESSION["loginOK"] = true;
-    header("Location: gast.php");
+    header("Location: ../gast.php");
 } else {
 
     if ($abfrage->num_rows >= 1) {

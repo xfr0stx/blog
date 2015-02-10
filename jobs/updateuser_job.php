@@ -15,11 +15,11 @@ $abfrage = mysqli_query($con, $sql);
     <head>
         <meta charset="UTF-8">
         <title>Bl0gster</title>
-        <link rel="stylesheet" type="text/css" href="design.css">
+        <link rel="stylesheet" type="text/css" href="../design.css">
     </head>
     <body>
         Update Erfolgreich<br>
         Zurück zum Profile!
-        <a href="userprofile.php">YourProfile!</a>
+        <a href="../userprofile.php">YourProfile!</a>
     </body>
 </html>
