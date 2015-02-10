@@ -22,8 +22,9 @@ if ($_SESSION["loginOK"] != true) {
                 <input type="submit" value="Update!">
             </form>
             <?php
-            include_once "db/dbcon.php";
-            $sql = "SELECT email,geburtsdatum FROM user WHERE idUser=16";
+            include_once "./db/dbcon.php";
+            $iduser=$_SESSION['usersession'];
+            $sql = "SELECT iduser,email,geburtsdatum FROM user WHERE iduser=$iduser";
             $abfrage = mysqli_query($con, $sql);
             while ($fetch = mysqli_fetch_assoc($abfrage)) {
                 echo '<div style="text-align: justify;">';
