@@ -12,14 +12,12 @@ erhält eine Bestätigung der registrierung.
     <body>
 <?php
 include_once "../db/dbcon.php";
-
 $escaped_email = mysqli_real_escape_string($con, $_POST["email"]);
 #$escaped_passwort = mysqli_real_escape_string($con,$_POST["passwort"]);
 $userpass = $_POST["passwort"];
 $escaped_geburtsdatum = mysqli_real_escape_string($con, $_POST["geburtsdatum"]);
 $convertdate = implode("-", array_reverse(explode('.', $escaped_geburtsdatum)));
 $hashedpw = hash('sha512', $userpass);
-
 $sql1 = "SELECT email FROM user WHERE email=\"$escaped_email\"";
 $abfrage1 = mysqli_query($con, $sql1);
 if ($abfrage1->num_rows >= 1) {
@@ -38,4 +36,3 @@ $abfrage = mysqli_query($con, $sql);
         <a href="../index.php">Anmeldung!</a>
     </body>
 </html>
-
