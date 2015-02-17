@@ -33,7 +33,9 @@ erhält eine Bestätigung der registrierung.
         } else {
             $sql1 = "INSERT INTO adresse(strasse,hausnummer,plz,ort) VALUES ('$escaped_strasse',$escaped_hausnummer ,$escaped_plz,'$escaped_ort')";
             $abfrage1 = mysqli_query($con, $sql1);
-            $sql = "INSERT INTO user(email,passwort,geburtsdatum) VALUES ('$escaped_email','$hashedpw' ,'$convertdate')";
+            $last_id =mysqli_insert_id($con);
+   
+            $sql = "INSERT INTO user(email,passwort,geburtsdatum,adresse_idadresse) VALUES ('$escaped_email','$hashedpw' ,'$convertdate','$last_id')";
             $abfrage = mysqli_query($con, $sql);
             
             ?>
