@@ -7,9 +7,9 @@ sich ebenfalls einloggen und wird dann auf die gast.php weitergeleitet.
 <?php
 include_once ("../db/dbcon.php");
 
-$escaped_email = mysqli_real_escape_string($con, $_POST["email"]);
-$userpass = mysqli_real_escape_string($con, $_POST["passwort"]);
-$hashedpw = hash('sha512', $userpass);
+//$escaped_email = mysqli_real_escape_string($con, $_POST["email"]);
+//$userpass = mysqli_real_escape_string($con, $_POST["passwort"]);
+//$hashedpw = hash('sha512', $userpass);
 
 //$stmt = $con->query("SELECT email,passwort,idUser,adresse_idadresse FROM blog.user WHERE email=\"$escaped_email\" AND passwort=\"$hashedpw\"");
 //$sql = "SELECT email,passwort,idUser,adresse_idadresse FROM blog.user WHERE email=\"$email\" AND passwort=\"$hashedpw\"";
