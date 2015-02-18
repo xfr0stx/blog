@@ -13,7 +13,7 @@ erhält eine Bestätigung der registrierung.
         include_once "../db/dbcon.php";
        
         $escaped_email = mysqli_real_escape_string($con, $_POST["email"]);
-        $userpass = mysqli_real_escape_string($con,$_POST["passwort"]);
+        $userpass = $_POST["passwort"];
         $hashedpw = hash('sha512', $userpass);
         $escaped_geburtsdatum = mysqli_real_escape_string($con, $_POST["geburtsdatum"]);
         $convertdate = implode("-", array_reverse(explode('.', $escaped_geburtsdatum)));
