@@ -28,10 +28,10 @@ if ($_SESSION["loginOK"] != true) {
             <?php
             include_once "./db/dbcon.php";
             $idadresse = $_SESSION["userad"];
-            var_dump($idadresse);
-            $sql = "SELECT u.iduser,u.email,u.geburtsdatum, ad.strasse, ad.hausnummer, ad.plz, ad.ort FROM adresse ad INNER JOIN user u ON adresse_idadresse=\"$idadresse\"";
-            $abfrage = mysqli_query($con, $sql);
-            while ($fetch = mysqli_fetch_assoc($abfrage)) {
+            $ustmt=$con->query("SELECT u.iduser,u.email,u.geburtsdatum, ad.strasse, ad.hausnummer, ad.plz, ad.ort FROM adresse ad INNER JOIN user u ON adresse_idadresse=\"$idadresse\"");
+//            $sql = "SELECT u.iduser,u.email,u.geburtsdatum, ad.strasse, ad.hausnummer, ad.plz, ad.ort FROM adresse ad INNER JOIN user u ON adresse_idadresse=\"$idadresse\"";
+//            $abfrage = mysqli_query($con, $sql);
+            while ($fetch = mysqli_fetch_assoc($ustmt)) {
                 echo '<div style="text-align: justify;">';
                 echo '<table border="1" align="center" width=30%>';
                 echo '<tr><td valign="top"><p>Email: ' . $fetch['email'] . '</p></td></tr>';

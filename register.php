@@ -15,7 +15,7 @@ das Geburtsdatum wird auf vollständigkeit gerpüft.
             <form action="./jobs/register_job.php" method="POST">
                 <td align="left">
                     Email <input type="email" size="20" value="" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br><br>
-                    Passwort <input type="password" size="20" value="" name="passwort" required>
+                    Passwort <input type="password" size="20" value="" name="passwort" required><br>
                     Geburtsdatum (dd.mm.yyyy) <input type="date" size="20" value="" name="geburtsdatum" required pattern="^(31|30|0[1-9]|[12][0-9]|[1-9])\.(0[1-9]|1[012]|[1-9])\.((18|19|20)\d{2}|\d{2})$"><br><br> 
                     Strasse Nr. <input type="text" size="20" value="" name="strasse" required>
                     <input type="text" size="5" value="" name="hausnummer" required><br>

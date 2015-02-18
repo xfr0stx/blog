@@ -27,12 +27,13 @@ erhält eine Bestätigung der registrierung.
 
         
 
-        $sql_existiert = "SELECT email FROM user WHERE email=\"$escaped_email\"";
-        $abfrage_existiert = mysqli_query($con, $sql_existiert);
+//        $sql_existiert = "SELECT email FROM user WHERE email=\"$escaped_email\"";
+//        $abfrage_existiert = mysqli_query($con, $sql_existiert);
+        $checkstmt=$con->query("SELECT email FROM user WHERE email=\"$escaped_email\"");
 
-        if ($abfrage_existiert->num_rows >= 1) {
+        if ($checkstmt->num_rows >= 1) {
             ?>
-            Schon vorhanden!<br>
+        <b>Schon vorhanden!</b><br>
             <?php
         } else {
             $sql1 = "INSERT INTO adresse(strasse,hausnummer,plz,ort) VALUES ('$escaped_strasse',$escaped_hausnummer ,$escaped_plz,'$escaped_ort')";
@@ -47,7 +48,7 @@ erhält eine Bestätigung der registrierung.
             <?php
         }
         ?>
-        Zurück zur Anmeldung!
+        Zurück zur
         <a href="../index.php">Anmeldung!</a>
     </body>
 </html>
