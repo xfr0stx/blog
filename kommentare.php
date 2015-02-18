@@ -20,33 +20,31 @@ if ($_SESSION["loginOK"] != true) {
         </head>
         <body>
             <h1>Kommentare</h1>
-            <form action="./jobs/eintrag_posten.php" method="POST">
-                Title <input type="text" size="20" value="" name="titel"><br><br>
-                Beitrag<br> <textarea name="eintrag" cols="50" rows="10" value="" style="width: 621px; height: 186px;;"></textarea> <br>
+            
+            <form action="./jobs/kommentar_posten.php" method="POST">
+
+                Kommentar<br> <textarea name="kommentar" cols="50" rows="10" value="" style="width: 621px; height: 186px;;"></textarea> <br>
+               <input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>">
                 <input type="submit" value="Posten!">
-            </form>
+            </form> 
             <a href="./jobs/logout.php">Logout!</a><br>
             <a href="blog.php">Zurück zum Blog!</a>
             <?php
-            
             include_once "db/dbcon.php";
-            $sql = "SELECT ideintrag, eintrag.titel,eintrag.eintrag,eintrag.eintragdatum,user.email FROM eintrag JOIN user ON eintrag.user_idUser = user.idUser ORDER BY eintrag.ideintrag  DESC";
+            $id = $_GET["id"];
+            var_dump($id);
+            $sql = "SELECT kommentar.kommentar,kommentar.datum, user.email FROM kommentar JOIN eintrag ON kommentar.eintrag_ideintrag = eintrag.ideintrag JOIN user ON kommentar.user_iduser = user.idUser WHERE ideintrag = \"$id\" ORDER BY kommentar.idanswere  DESC;";
             $abfrage = mysqli_query($con, $sql);
-         
+
             echo '<br>';
             echo '<br>';
             while ($fetch = mysqli_fetch_assoc($abfrage)) {
-                $ideintrag = $fetch['ideintrag'];
-                $commcountchk = mysqli_query($con, "SELECT ideintrag FROM eintrag JOIN kommentar ON  kommentar.eintrag_ideintrag=eintrag.ideintrag");
-                $commcount = mysqli_num_rows($commcountchk);
 
                 echo '<div style="text-align: justify">';
-                echo '<h2>' . $fetch['titel'] . '</h2>';
-                echo '<p align="center">Posted am: ' . $fetch['eintragdatum'] . '.</p>';
+                echo '<p align="center">Posted am: ' . $fetch['datum'] . '.</p>';
                 echo '<p align="center">von: ' . $fetch['email'] . '</p>';
                 echo '<table style="word-break:break-all;word-wrap:break-word" border="1" align="center" width="300">';
-                echo '<tr><td width ="300" valign="top">' . $fetch['eintrag'] . '</td></tr>';
-                echo '<tr><td width ="300" align="right"><p>' . '<a href=".php">[Kommentar($commcount}")</a>' . '</p></td></tr>';
+                echo '<tr><td width ="300" valign="top">' . $fetch['kommentar'] . '</td></tr>';
                 echo '</table>';
                 echo '</div>';
             }
