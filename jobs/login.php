@@ -13,8 +13,7 @@ $hashedpw = hash('sha512', $userpass);
 echo($hashedpw);
 
 
-
-$sql = "SELECT email,passwort,idUser FROM blog.user WHERE email=\"$email\" AND passwort=\"$hashedpw\"";
+$sql = "SELECT email,passwort,idUser,adresse_idadresse FROM blog.user WHERE email=\"$email\" AND passwort=\"$hashedpw\"";
 $abfrage = mysqli_query($con, $sql);
 
 if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {
@@ -28,10 +27,11 @@ if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {
         $_SESSION["loginOK"] = true;
         $fetch = mysqli_fetch_assoc($abfrage);
         $_SESSION['usersession'] = $fetch['idUser'];
+        $_SESSION["userad"] = $fetch['adresse_idadresse'];
         header("Location: ../blog.php");
     } else {
 
-         header("Location: ../index.php");
+        header("Location: ../index.php");
     }
 }
 ?>

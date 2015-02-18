@@ -16,15 +16,20 @@ if ($_SESSION["loginOK"] != true) {
         <body>
             <h1>Profile bearbeiten, dude!</h1>
             <form action="./jobs/updateuser_job.php" method="POST">
-                Neue-Email <input type="text" size="20" value="" name="email"><br><br>
+                Neue-Email <input type="email" size="20" value="" name="email"><br><br>
                 Geburtsdatum (dd.mm.yyyy) <input type="date" size="20" value="" name="geburtsdatum"  pattern="^(31|30|0[1-9]|[12][0-9]|[1-9])\.(0[1-9]|1[012]|[1-9])\.((18|19|20)\d{2}|\d{2})$"><br><br>
                 Password <input type="Password" size="20" value="" name="passwort" ><br>
+                Strasse Nr. <input type="text" size="20" value="" name="strasse" required>
+                <input type="text" size="5" value="" name="hausnummer" required><br>
+                PLZ Ort <input type="text" size="5" value="" name="plz" required>
+                <input type="text" size="5" value="" name="ort" required><br>
                 <input type="submit" value="Update!">
             </form>
             <?php
             include_once "./db/dbcon.php";
-            $iduser=$_SESSION['usersession'];
-            $sql = "SELECT u.iduser,u.email,u.geburtsdatum, ad.strasse, ad.hausnummer, ad.plz, ad.ort FROM adresse ad INNER JOIN user u ON adresse_idadresse=idadresse";
+            $idadresse = $_SESSION["userad"];
+            var_dump($idadresse);
+            $sql = "SELECT u.iduser,u.email,u.geburtsdatum, ad.strasse, ad.hausnummer, ad.plz, ad.ort FROM adresse ad INNER JOIN user u ON adresse_idadresse=\"$idadresse\"";
             $abfrage = mysqli_query($con, $sql);
             while ($fetch = mysqli_fetch_assoc($abfrage)) {
                 echo '<div style="text-align: justify;">';
