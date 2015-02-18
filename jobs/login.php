@@ -17,7 +17,7 @@ $hashedpw = hash('sha512', $userpass);
 
 $stmt = $con->prepare("SELECT email,passwort,idUser, adresse_idadresse FROM blog.user WHERE email=? AND passwort=?")
 		or die("<b>Prepare Error: </b>" . $con->error);
-$stmt->bind_param('ss',$escaped_email,$hashedpw);
+$stmt->bind_param("ss",$escaped_email,$hashedpw);
 $stmt->execute();
 
 if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {
