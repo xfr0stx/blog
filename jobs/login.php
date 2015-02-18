@@ -7,9 +7,9 @@ sich ebenfalls einloggen und wird dann auf die gast.php weitergeleitet.
 <?php
 include_once ("../db/dbcon.php");
 
-//$escaped_email = mysqli_real_escape_string($con, $_POST["email"]);
-//$userpass = mysqli_real_escape_string($con, $_POST["passwort"]);
-//$hashedpw = hash('sha512', $userpass);
+$escaped_email = mysqli_real_escape_string($con, $_POST["email"]);
+$userpass = mysqli_real_escape_string($con, $_POST["passwort"]);
+$hashedpw = hash('sha512', $userpass);
 
 //$stmt = $con->query("SELECT email,passwort,idUser,adresse_idadresse FROM blog.user WHERE email=\"$escaped_email\" AND passwort=\"$hashedpw\"");
 //$sql = "SELECT email,passwort,idUser,adresse_idadresse FROM blog.user WHERE email=\"$email\" AND passwort=\"$hashedpw\"";
@@ -17,8 +17,7 @@ include_once ("../db/dbcon.php");
 
 $stmt = $con->prepare("SELECT email,passwort,idUser, adresse_idadresse FROM blog.user WHERE email=? AND passwort=?")
 		or die("<b>Prepare Error: </b>" . $con->error);
-$stmt->bind_param('s',$_POST["email"]);
-$stmt->bind_param('s',hash('sha512', $_POST["passwort"]));
+$stmt->bind_param('ss',$escaped_email,$hashedpw);
 $stmt->execute();
 
 if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {

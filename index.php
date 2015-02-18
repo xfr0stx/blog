@@ -13,7 +13,7 @@ Hier können sich Benutzer und Gäste einloggen und ggf. neu Registrieren
         Bitte melden Sie sich an um einen Eintrag zu posten:
         <p>Gäste haben nur Lesezugang (User:gast - PW:gast)!</p>
         <form action="./jobs/login.php" method="POST">
-            E-Mail: <input type="email" size="20" value="" name="email" required><br><br>
+            E-Mail: <input type="text" size="20" value="" name="email" required><br><br>
             Passwort: <input type="Password" size="20" value="" name="passwort" required ><br>
             <input type="submit" value="Senden">
         </form>
