@@ -36,8 +36,8 @@ if ($_SESSION["loginOK"] != true) {
             $sql = "SELECT eintrag.titel, kommentar.kommentar,kommentar.datum, user.email FROM kommentar JOIN eintrag ON kommentar.eintrag_ideintrag = eintrag.ideintrag JOIN user ON kommentar.user_iduser = user.idUser WHERE ideintrag = \"$id\" ORDER BY kommentar.idanswere  DESC;";
             $abfrage = mysqli_query($con, $sql);
 
-            $fetcht = mysqli_fetch_assoc($abfrage);
-            echo '<h2><p align="center"> Kommentare zum Titel: ' . $fetcht['titel'] . '.</p></h2>';
+           #$fetcht = mysqli_fetch_assoc($abfrage);
+           #echo '<h2><p align="center"> Kommentare zum Titel: ' . $fetcht['titel'] . '.</p></h2>';
            
             echo '<br>';
             echo '<br>';

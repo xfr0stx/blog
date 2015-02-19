@@ -12,7 +12,7 @@ das Geburtsdatum wird auf vollständigkeit gerpüft.
         <h1>Regstriere dich!</h1><br>
         Bitte vervollständige die folgenden Einträge:
         <table border="1" style="width:30%" align="center">
-            <form action="./jobs/register_job.php" method="POST">
+            <form action="./jobs/register_job.php" method="POST" enctype="multipart/form-data">
                 <td align="left">
                     Email <input type="email" size="20" value="" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br><br>
                     Passwort <input type="password" size="20" value="" name="passwort" required><br>
@@ -21,7 +21,8 @@ das Geburtsdatum wird auf vollständigkeit gerpüft.
                     <input type="text" size="5" value="" name="hausnummer" required><br>
                     PLZ Ort <input type="text" size="5" value="" name="plz" required>
                     <input type="text" size="5" value="" name="ort" required><br>
-                    <input type="submit" value="Senden">
+                    Avatar <input type="file" name="upload"><br>
+                    <input type="submit" value="Senden" name="submit">
                 </td>
             </form>
         </table>

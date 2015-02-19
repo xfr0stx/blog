@@ -15,7 +15,7 @@ Hier können sich Benutzer und Gäste einloggen und ggf. neu Registrieren
         <form action="./jobs/login.php" method="POST">
             E-Mail: <input type="text" size="20" value="" name="email" required><br><br>
             Passwort: <input type="Password" size="20" value="" name="passwort" required ><br>
-            <input type="submit" value="Senden">
+            <input type="submit" csvalue="Senden">
         </form>
         <a href="register.php">Registrieren</a>
 

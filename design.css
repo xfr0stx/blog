@@ -1,6 +1,7 @@
 h1 {
     font-size: 4em;
     text-align: center;
+    text-shadow: 10px 11px 12px #cccccc;
 }
 h1, h3 {
     font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
@@ -14,7 +15,22 @@ h2 {
 body {
     font-size: 62.5%; /* Resets 1em to 10px */
     font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
-    background: #d5d6d7 url('images/kubrickbgcolor.jpg');
-    color: #333;
-    text-align: center;
+    background: #999966;
+    color: whitesmoke;
+    text-align: Center;
+}
+
+input:focus, textarea:focus {
+    background-color: gre;
+}
+
+a:link {
+    color: #000000;
+}
+a:visited {
+    color: #000000;
+}
+
+a:hover {
+    color:whitesmoke; 
 }
