@@ -13,13 +13,13 @@ $hashedpw = hash('sha512', $userpass);
 
 $sql = "SELECT email,passwort,idUser,adresse_idadresse FROM blog.user WHERE email=\"$escaped_email\" AND passwort=\"$hashedpw\"";
 $abfrage = mysqli_query($con, $sql);
-
+//
 //$stmt = $con->prepare("SELECT email,passwort,idUser, adresse_idadresse FROM blog.user WHERE email= ? AND passwort= ?")
 //		or die("<b>Prepare Error: </b>" . $con->error);
 //$stmt->bind_param('ss',$escaped_email,$hashedpw);
 //$stmt->execute();
 //$stmt->store_result();
-//
+
 //echo mysqli_error($con);
 
 if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {
@@ -32,6 +32,7 @@ if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {
         session_start();
         $_SESSION["loginOK"] = true;
         $fetch = mysqli_fetch_assoc($abfrage);
+      # $fetch = mysqli_stmt_fetch($stmt);
         $_SESSION['usersession'] = $fetch['idUser'];
         $_SESSION["userad"] = $fetch['adresse_idadresse'];
         header("Location: ../blog.php");
@@ -40,4 +41,5 @@ if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {
         header("Location: ../index.php");
     }
 }
+#$stmt->close();
 ?>
