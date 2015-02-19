@@ -26,7 +26,11 @@ erhält eine Bestätigung der registrierung.
         
         move_uploaded_file($_FILES['upload']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/blog/img/" . $_FILES['upload']['name']);
         $path= $_FILES['upload']['name'];
-
+        
+//        $temp = explode(".",$_FILES["upload"]["name"]);
+//        $newfilename = rand(1,99999) . '.' .end($temp);
+//        move_uploaded_file($_FILES["upload"]["tmp_name"], "./img/" . $newfilename);
+        
 
 
 //        $sql_existiert = "SELECT email FROM user WHERE email=\"$escaped_email\"";
