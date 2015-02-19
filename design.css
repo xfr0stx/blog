@@ -21,7 +21,7 @@ body {
 }
 
 input:focus, textarea:focus {
-    background-color: gre;
+    background-color: grey;
 }
 
 a:link {
