@@ -34,3 +34,7 @@ a:visited {
 a:hover {
     color:whitesmoke; 
 }
+.avatar {
+    max-width:80px;
+    max-height:80px;
+}

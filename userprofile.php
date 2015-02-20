@@ -15,34 +15,45 @@ if ($_SESSION["loginOK"] != true) {
         </head>
         <body>
             <h1>Profile bearbeiten, dude!</h1>
-            <form action="./jobs/updateuser_job.php" method="POST">
-                Neue-Email <input type="email" size="20" value="" name="email"><br><br>
-                Geburtsdatum (dd.mm.yyyy) <input type="date" size="20" value="" name="geburtsdatum"  pattern="^(31|30|0[1-9]|[12][0-9]|[1-9])\.(0[1-9]|1[012]|[1-9])\.((18|19|20)\d{2}|\d{2})$"><br><br>
-                Password <input type="Password" size="20" value="" name="passwort" ><br>
-                Strasse Nr. <input type="text" size="20" value="" name="strasse" required>
-                <input type="text" size="5" value="" name="hausnummer" required><br>
-                PLZ Ort <input type="text" size="5" value="" name="plz" required>
-                <input type="text" size="5" value="" name="ort" required><br>
-                <input type="submit" value="Update!">
-            </form>
+<?php
+            if (array_key_exists('error', $_GET)) {
+                print("Falscher Passwort eingegeben!");
+            } elseif (array_key_exists('error2', $_GET)) {
+                print("Die beiden neuen Passwörter passen nicht!");
+            }
+            ?>
             <?php
             include_once "./db/dbcon.php";
-            $idadresse = $_SESSION["userad"];
-          #  $ustmt=$con->query("SELECT u.iduser,u.email,u.geburtsdatum, ad.strasse, ad.hausnummer, ad.plz, ad.ort FROM adresse ad INNER JOIN user u ON adresse_idadresse=\"$idadresse\"");
-            $sql = "SELECT u.iduser,u.email,u.geburtsdatum, ad.strasse, ad.hausnummer, ad.plz, ad.ort FROM adresse ad INNER JOIN user u ON adresse_idadresse=idadresse WHERE idadresse =$idadresse";
-            $abfrage = mysqli_query($con, $sql);
-            var_dump($sql . $abfrage->num_rows);
-            while ($fetch = mysqli_fetch_assoc($abfrage)) {
-                echo '<div style="text-align: justify;">';
-                echo '<table border="1" align="center" width=30%>';
-                echo '<tr><td valign="top"><p>Email: ' . $fetch['email'] . '</p></td></tr>';
-                echo '<tr><td valign="top"><p> Geburtsdatum: ' . $fetch['geburtsdatum'] . '</p></td></tr>';
-                echo '<tr><td valign="top"><p> Straße: ' . $fetch['strasse'] . '</p></td></tr>';
-                echo '<tr><td valign="top"><p> Hausnummer: ' . $fetch['hausnummer'] . '</p></td></tr>';
-                echo '<tr><td valign="top"><p> PLZ: ' . $fetch['plz'] . '</p></td></tr>';
-                echo '<tr><td valign="top"><p> Ort: ' . $fetch['ort'] . '</p></td></tr>';
-                echo '</table>';
-                echo '</div>';
+
+            $stmt = $con->prepare("SELECT u.iduser,u.email,date_format(u.geburtsdatum, '%d.%m.%Y'), ad.strasse, ad.hausnummer, ad.plz, ad.ort FROM adresse ad INNER JOIN user u ON adresse_idadresse=idadresse WHERE idadresse =?")
+                    or die("<b>Prepare Error: </b>" . $this->con->error);
+            $stmt->bind_param("i", $_SESSION["userad"]);
+            $stmt->execute();
+            $stmt->bind_result($iduser, $email, $geburtsdatum, $strasse, $hausnummer, $plz, $ort);
+
+            if ($stmt->fetch()) {
+                
+                print("
+                        <form action='./jobs/updateuser_job.php' method='POST' enctype='multipart/form-data'>
+                      
+               Email<br>
+               <input type='email' size='20' value='$email' name='email'><br>
+               Geburtsdatum (dd.mm.yyyy) <br><input type='date' size='20' value='$geburtsdatum' name='geburtsdatum'  pattern='^(31|30|0[1-9]|[12][0-9]|[1-9])\.(0[1-9]|1[012]|[1-9])\.((18|19|20)\d{2}|\d{2})$'><br>
+                Strasse Nr. <br><input type='text' size='20' value='$strasse' name='strasse' required>
+                <input type='text' size='5' value='$hausnummer' name='hausnummer' required><br>
+                PLZ Ort <br><input type='text' size='5' value='$plz' name='plz' required>
+                <input type='text' size='5' value='$ort' name='ort' required><br>
+                Avatar <br><input type='file' name='avatarnew'><br>
+                retypePW* <br><input type='Password' size='20' value='' name='new_passwort' ><br>
+                retypePW* <br><input type='Password' size='20' value='' name='new_passwort2' ><br>
+                Password <br><input type='Password' size='20' value='' name='passwort' ><br><br>
+                <input type='submit' value='Update!'>
+                <br>
+                <br>
+                * = optional
+                </form>
+                ");
+                
             }
             ?>
         </body>

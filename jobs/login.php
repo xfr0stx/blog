@@ -8,19 +8,15 @@ sich ebenfalls einloggen und wird dann auf die gast.php weitergeleitet.
 include_once ("../db/dbcon.php");
 
 $escaped_email = mysqli_real_escape_string($con, $_POST["email"]);
-$userpass = mysqli_real_escape_string($con, $_POST["passwort"]);
+$userpass = $_POST["passwort"];
 $hashedpw = hash('sha512', $userpass);
 
-$sql = "SELECT email,passwort,idUser,adresse_idadresse FROM blog.user WHERE email=\"$escaped_email\" AND passwort=\"$hashedpw\"";
-$abfrage = mysqli_query($con, $sql);
-//
-//$stmt = $con->prepare("SELECT email,passwort,idUser, adresse_idadresse FROM blog.user WHERE email= ? AND passwort= ?")
-//		or die("<b>Prepare Error: </b>" . $con->error);
-//$stmt->bind_param('ss',$escaped_email,$hashedpw);
-//$stmt->execute();
-//$stmt->store_result();
 
-//echo mysqli_error($con);
+$stmt = $con->prepare("SELECT idUser, email,adresse_idadresse FROM blog.user WHERE email = ? AND passwort = ?;")
+        or die("<b>Prepare Error: </b>" . $this->con->error);
+$stmt->bind_param("ss", $escaped_email, $hashedpw);
+$stmt->execute();
+$stmt->bind_result($uid, $email, $idadresse);
 
 if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {
     session_start();
@@ -28,18 +24,17 @@ if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {
     header("Location: ../gast.php");
 } else {
 
-    if ($abfrage->num_rows >= 1) {
+    if ($stmt->fetch()) {
         session_start();
         $_SESSION["loginOK"] = true;
-        $fetch = mysqli_fetch_assoc($abfrage);
-      # $fetch = mysqli_stmt_fetch($stmt);
-        $_SESSION['usersession'] = $fetch['idUser'];
-        $_SESSION["userad"] = $fetch['adresse_idadresse'];
+        $_SESSION['email'] = $email;
+        $_SESSION['usersession'] = $uid;
+        $_SESSION["userad"] = $idadresse;
+        $stmt->close();
         header("Location: ../blog.php");
     } else {
-
-        header("Location: ../index.php");
+        $stmt->close();
+        header("Location: ../index.php?error");
     }
 }
-#$stmt->close();
 ?>

@@ -17,8 +17,12 @@ if ($_SESSION["loginOK"] != true) {
             <a href="jobs/logout.php">Logout!</a>
             <?php
             include_once "db/dbcon.php";
-            $sql = "SELECT ideintrag, eintrag.titel,eintrag.eintrag,eintrag.eintragdatum,user.email FROM eintrag JOIN user ON eintrag.user_idUser = user.idUser ORDER BY eintrag.ideintrag  DESC";
+            $sql = "SELECT ideintrag, eintrag.titel,eintrag.eintrag,eintrag.eintragdatum,user.email,user.avatar FROM eintrag JOIN user ON eintrag.user_idUser = user.idUser ORDER BY eintrag.ideintrag  DESC";
             $abfrage = mysqli_query($con, $sql);
+            $stmt = $con->prepare("SELECT ideintrag, eintrag.titel,eintrag.eintrag,eintrag.eintragdatum,user.email,user.avatar FROM eintrag JOIN user ON eintrag.user_idUser = user.idUser ORDER BY eintrag.ideintrag  DESC")
+                    or die("<b>Prepare Error: </b>" . $this->con->error);
+            $stmt->execute();
+            $stmt->bind_result($ideintrag, $titel, $eintrag, $eintragdatum, $email, $avatar);
 
 
 
@@ -39,6 +43,7 @@ if ($_SESSION["loginOK"] != true) {
                 echo '</table>';
                 echo '</div>';
             }
+            $stmt->close();
             ?>
 
         </body>

@@ -21,6 +21,9 @@ Hier können sich Benutzer und Gäste einloggen und ggf. neu Registrieren
 
 
         <?php
+        if(array_key_exists("error",$_GET)){
+            echo "Falsches PW";
+        }
         ?>
     </body>
 </html>
