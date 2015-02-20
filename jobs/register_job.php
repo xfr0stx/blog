@@ -22,38 +22,47 @@ erhält eine Bestätigung der registrierung.
         $escaped_hausnummer = mysqli_real_escape_string($con, $_POST["hausnummer"]);
         $escaped_plz = mysqli_real_escape_string($con, $_POST["plz"]);
         $escaped_ort = mysqli_real_escape_string($con, $_POST["ort"]);
-        
-        
-        move_uploaded_file($_FILES['upload']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/blog/img/" . $_FILES['upload']['name']);
-        $path= $_FILES['upload']['name'];
-        
-//        $temp = explode(".",$_FILES["upload"]["name"]);
-//        $newfilename = rand(1,99999) . '.' .end($temp);
-//        move_uploaded_file($_FILES["upload"]["tmp_name"], "./img/" . $newfilename);
-        
 
+        if (isset($_FILES['upload'])) {
+            $size = $_FILES['upload']['size'];
+            $type = $_FILES['upload']['type'];
+            $check = false;
 
-//        $sql_existiert = "SELECT email FROM user WHERE email=\"$escaped_email\"";
-//        $abfrage_existiert = mysqli_query($con, $sql_existiert);
-        $checkstmt = $con->query("SELECT email FROM user WHERE email=\"$escaped_email\"");
+            echo $size;
+            echo $type;
 
-        if ($checkstmt->num_rows >= 1) {
-            ?>
-            <b>Schon vorhanden!</b><br>
-            <?php
-        } else {
-            $sql1 = "INSERT INTO adresse(strasse,hausnummer,plz,ort) VALUES ('$escaped_strasse',$escaped_hausnummer ,$escaped_plz,'$escaped_ort')";
-            $abfrage1 = mysqli_query($con, $sql1);
-            $last_id = mysqli_insert_id($con);
+            if ($type == 'image/jpeg' or $type == 'image/gif') {
+                $check = true;
+            }
 
-            $sql = "INSERT INTO user(email,passwort,geburtsdatum,avatar, adresse_idadresse) VALUES ('$escaped_email','$hashedpw' ,'$convertdate','img/$path','$last_id')";
-            $abfrage = mysqli_query($con, $sql);
-            ?>
+            if ($size < 102400 && $check == true) {
+                $img = uniqid() . "-" . $_FILES['upload']['name'];
+                move_uploaded_file($_FILES['upload']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/blog/img/" . $img);
 
-            Regestrierung erfolgreich!<br>
-            <?php
+                $checkstmt = $con->query("SELECT email FROM user WHERE email=\"$escaped_email\"");
+
+                if ($checkstmt->num_rows >= 1) {
+                    ?>
+                    <b>Schon vorhanden!</b><br>
+                    <?php
+                } else {
+                    $sql1 = "INSERT INTO adresse(strasse,hausnummer,plz,ort) VALUES ('$escaped_strasse',$escaped_hausnummer ,$escaped_plz,'$escaped_ort')";
+                    $abfrage1 = mysqli_query($con, $sql1);
+                    $last_id = mysqli_insert_id($con);
+
+                    $sql = "INSERT INTO user(email,passwort,geburtsdatum,avatar, adresse_idadresse) VALUES ('$escaped_email','$hashedpw' ,'$convertdate','img/$img','$last_id')";
+                    $abfrage = mysqli_query($con, $sql);
+                    ?>
+
+                    Regestrierung erfolgreich!<br>
+                    <?php
+                }
+            } elseif ($size > 102400) {
+                echo 'Die Datei ist zu groß! <br>';
+            } elseif ($check == false) {
+                echo 'Die Datei ist kein *.jpg / *.gif Bild oder ist unbekannt! <br>';
+            }
         }
-        
         ?>
         Zurück zur
         <a href="../index.php">Anmeldung!</a>
