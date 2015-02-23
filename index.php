@@ -17,12 +17,13 @@ Hier können sich Benutzer und Gäste einloggen und ggf. neu Registrieren
             Passwort: <input type="Password" size="20" value="" name="passwort" required ><br>
             <input type="submit" csvalue="Senden">
         </form>
-        <a href="register.php">Registrieren</a>
+        <a href="register.php">Registrieren</a><br>
 
 
         <?php
         if(array_key_exists("error",$_GET)){
-            echo "Falsches PW";
+            echo"<br>";
+            echo "<b>Falsche email oder pw</b>";
         }
         ?>
     </body>

@@ -46,9 +46,9 @@ if ($_SESSION["loginOK"] != true) {
             $stmt->bind_result($ideintrag, $titel, $eintrag, $eintragdatum, $email, $iduser ,$kommentare, $iduser);
             echo '<br>';
             echo '<br>';
-            
+                      
             while ($stmt->fetch()) {
-                   echo '<div style="text-align: justify">';
+                echo '<div style="text-align: justify">';
                 echo '<h2>' . $titel . '</h2>';
                 echo '<p align="center">Posted am: ' . $eintragdatum . '.</p>';
                 echo '<p align="center">von: ' . $email . '</p>';

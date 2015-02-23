@@ -44,13 +44,14 @@ if ($_SESSION["loginOK"] != true) {
                 PLZ Ort <br><input type='text' size='5' value='$plz' name='plz' required>
                 <input type='text' size='5' value='$ort' name='ort' required><br>
                 Avatar <br><input type='file' name='avatarnew'><br>
-                retypePW* <br><input type='Password' size='20' value='' name='new_passwort' ><br>
-                retypePW* <br><input type='Password' size='20' value='' name='new_passwort2' ><br>
-                Password <br><input type='Password' size='20' value='' name='passwort' ><br><br>
+                neues Passwort* <br><input type='Password' size='20' value='' name='new_passwort' ><br>
+                neues Passwort* <br><input type='Password' size='20' value='' name='new_passwort2' ><br>
+                Password** <br><input type='Password' size='20' value='' name='passwort' ><br><br>
                 <input type='submit' value='Update!'>
                 <br>
                 <br>
                 * = optional
+                ** = erforderlich
                 </form>
                 ");
                 
