@@ -1,0 +1,27 @@
+SELECT idUser FROM blog.user WHERE email='\' or 1=1; -- ' AND passwort='d404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db';
+
+
+---
+
+php.ini -> fehlmeldungen nicht sichtbar (z.B. "or die") -> zum testen ok - produktiv jedoch nicht
+
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `v_kommentare` AS
+    SELECT 
+        `eintrag`.`ideintrag` AS `ideintrag`,
+        `eintrag`.`titel` AS `titel`,
+        `eintrag`.`eintrag` AS `eintrag`,
+        `eintrag`.`eintragdatum` AS `eintragdatum`,
+        `user`.`email` AS `email`,
+        `user`.`idUser` AS `iduser`,
+        COUNT(`kommentar`.`idanswere`) AS `kommentare`
+    FROM
+        ((`eintrag`
+        JOIN `user` ON ((`eintrag`.`user_idUser` = `user`.`idUser`)))
+        LEFT JOIN `kommentar` ON ((`eintrag`.`ideintrag` = `kommentar`.`eintrag_ideintrag`)))
+    GROUP BY `eintrag`.`ideintrag`
+    ORDER BY `eintrag`.`ideintrag` DESC
