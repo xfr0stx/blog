@@ -19,72 +19,99 @@ erhält eine Bestätigung der registrierung.
         $convertdate = implode("-", array_reverse(explode('.', $escaped_geburtsdatum)));
 
         $escaped_strasse = mysqli_real_escape_string($con, $_POST["strasse"]);
-        $escaped_hausnummer = mysqli_real_escape_string($con, $_POST["hausnummer"]);
-        $escaped_plz = mysqli_real_escape_string($con, $_POST["plz"]);
-        $escaped_ort = mysqli_real_escape_string($con, $_POST["ort"]);
+     $escaped_hausnummer = mysqli_real_escape_string($con, $_POST["hausnummer"]);
+         $escaped_plz = mysqli_real_escape_string($con, $_POST["plz"]);
+         $escaped_ort = mysqli_real_escape_string($con, $_POST["ort"]);
 
-         
-        if (isset($_FILES['upload'])) {
-            $size = $_FILES['upload']['size'];
-            $type = $_FILES['upload']['type'];
-            $check = false;
+        
+        // Avatar
+        $avatar = false;
+        $error = false;
+        if (isset($_FILES['upload']) && $_FILES['upload']["size"]>0) {
+             $size = $_FILES['upload']['size'];
+             $type = $_FILES['upload']['type'];
 
-            echo $size;
-            echo $type;
+            $checked=false;
+             
+             if ($type == 'image/jpeg') {
 
-            
-            if ($type == 'image/jpeg') {
-                $check=true;
-                $fileend='.jpg';
-            } elseif($type == 'image/gif') {
+                 $fileend='.jpg';
                 $check = true;
-                $fileend='.gif';
+             } elseif($type == 'image/gif') {
+                 $check = true;
+                 $fileend='.gif';
+             }
+             
+
+            // Dateigröße
+             if ($size < 102400 && $check == true) {
+                $avatar=true;
+            } else {
+                print("<b>Dateigröße zu groß! <=100kb!</b>");
+                $error=true;
             }
-            
-
-            if ($size < 102400 && $check == true) {
-                $img = $idUser . $fileend;
-                move_uploaded_file($_FILES['upload']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/blog/img/" . $img);
-
-                $checkstmt = $con->query("SELECT email FROM user WHERE email=\"$escaped_email\"");
-
-                if ($checkstmt->num_rows >= 1) {
-                    ?>
-                    <b>Schon vorhanden!</b><br>
-                    <?php
-                } else {
-//                                        $sql1 = "INSERT INTO adresse(strasse,hausnummer,plz,ort) VALUES ('$escaped_strasse',$escaped_hausnummer ,$escaped_plz,'$escaped_ort')";
-//                    $abfrage1 = mysqli_query($con, $sql1);
-                    $stmt = $con->prepare("INSERT INTO adresse(strasse,hausnummer,plz,ort) VALUES (?,?,?,?)")
-                            or die("<b>Prepare Error: </b>" . $con->error);
-
-                    $stmt->bind_param("siis", $escaped_strasse, $escaped_hausnummer, $escaped_plz, $escaped_ort);
-                    $stmt->execute();
-                    #$stmt->bind_result($strasse,$hausnummer,$plz,$ort);
-                    $stmt->close();
-                    $last_id = mysqli_insert_id($con);
-
-//                    $sql = "INSERT INTO user(email,passwort,geburtsdatum,avatar, adresse_idadresse) VALUES ('$escaped_email','$hashedpw' ,'$convertdate','img/$img','$last_id')";
-//                    $abfrage = mysqli_query($con, $sql);
-                    $stmt = $con->prepare("INSERT INTO user(email,passwort,geburtsdatum,avatar,adresse_idadresse) VALUES (?,?,STR_TO_DATE(?,'%Y-%m-%d'),CONCAT('img/',?),?)")
-                            or die("<b>Prepare Error: </b>" . $con->error);
-                    $stmt->bind_param("ssssi", $escaped_email, $hashedpw, $convertdate, $img, $last_id);
-                    $stmt->execute();
-                    #$stmt->bind_result($ideintrag, $titel, $eintrag, $eintragdatum, $email, $avatar,$kommentare);
-                    $stmt->close();
-                    ?>
-
-                    Regestrierung erfolgreich!<br>
-            <?php
         }
-    } elseif ($size > 102400) {
-        echo 'Die Datei ist zu groß! <br>';
-    } elseif ($check == false) {
-        echo 'Die Datei ist kein *.jpg / *.gif Bild oder ist unbekannt! <br>';
-    }
-}
-?>
-        Zurück zur
-        <a href="../index.php">Anmeldung!</a>
+        
+        // Benutzer schon vorhanden?
+        $stmt = $con->prepare("SELECT email FROM user WHERE email=?");
+        $stmt->bind_param("s", $escaped_email);
+        $stmt->execute();
+        $stmt->store_result();
+        $user_exists=($stmt->num_rows()==1);
+        $stmt->free_result();
+        $stmt->close();
+        
+        if ($user_exists) {
+           print("<b>Schon vorhanden!</b>");
+           $error=true;
+        }
+        
+        if(!$error) {
+                 
+            // Adresse updaten
+            $stmt=$con->prepare("SELECT idadresse FROM adresse WHERE strasse=? AND hausnummer=? AND plz=? AND ort=?;");
+            $stmt->bind_param("sdds", $escaped_strasse, $escaped_hausnummer, $escaped_plz, $escaped_ort);
+            $stmt->execute();
+            $stmt->bind_result($idadresse);
+            // Falls neue Adresse noch nicht vorhanden --> erstellen
+            if(! $stmt->fetch()) {
+                $stmt->close();
+                $stmt=$con->prepare("INSERT INTO adresse (strasse, hausnummer, plz, ort) VALUES (?,?,?,?);");
+                $stmt->bind_param("sdds", $escaped_strasse, $escaped_hausnummer, $escaped_plz, $escaped_ort);
+                $stmt->execute();
+                $idadresse=$stmt->insert_id;
+            }
+            $stmt->close();
+
+            var_dump($idadresse);
+            
+            // Benutzer hinzufügen
+            $stmt = $con->prepare("INSERT INTO user(email,passwort,geburtsdatum,adresse_idadresse) VALUES (?,?,STR_TO_DATE(?,'%Y-%m-%d'),?)")
+                    or die("<b>Prepare Error: </b>" . $con->error);
+            $stmt->bind_param("sssi", $escaped_email, $hashedpw, $convertdate, $idadresse);
+            $stmt->execute();
+            $idUser = $con->insert_id;
+            $stmt->close();
+            var_dump($idUser);
+
+            // Avatar hochladen und updaten
+            if($avatar) {
+                 $img = $idUser . $fileend;
+                 move_uploaded_file($_FILES['upload']['tmp_name'], $_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/blog/img/" . $img);
+
+                
+                $stmt->prepare("UPDATE blog.user SET avatar=CONCAT('img/',?) WHERE idUser=?;")
+                    or die("<b>Prepare Error: </b>" . $con->error);
+                $stmt->bind_param("sd", $img, $idUser);
+                $stmt->execute();
+                $stmt->close();
+            }
+            print("Regestrierung erfolgreich!<br>");
+         }
+
+ ?>
+         Zurück zur
+         <a href="../index.php">Anmeldung!</a>
+
     </body>
 </html>

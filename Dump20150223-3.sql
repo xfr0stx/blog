@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
+﻿-- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: blog
 -- ------------------------------------------------------
@@ -18,6 +18,8 @@
 --
 -- Table structure for table `adresse`
 --
+create schema blog;
+use blog;
 
 DROP TABLE IF EXISTS `adresse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
