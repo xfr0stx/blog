@@ -23,7 +23,7 @@ if ($_SESSION["loginOK"] != true) {
             $stmt->bind_result($ideintrag, $titel, $eintrag, $eintragdatum, $email, $iduser, $kommentare, $iduser);
             echo '<br>';
             echo '<br>';
-            
+
             while ($stmt->fetch()) {
 
                 echo '<div style="text-align: justify">';

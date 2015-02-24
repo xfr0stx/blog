@@ -15,7 +15,7 @@ if ($_SESSION["loginOK"] != true) {
         </head>
         <body>
             <h1>Profile bearbeiten, dude!</h1>
-<?php
+            <?php
             if (array_key_exists('error', $_GET)) {
                 print("Falscher Passwort eingegeben!");
             } elseif (array_key_exists('error2', $_GET)) {
@@ -25,14 +25,14 @@ if ($_SESSION["loginOK"] != true) {
             <?php
             include_once "./db/dbcon.php";
 
-            $stmt = $con->prepare("SELECT u.iduser,u.email,date_format(u.geburtsdatum, '%d.%m.%Y'), ad.strasse, ad.hausnummer, ad.plz, ad.ort FROM adresse ad INNER JOIN user u ON adresse_idadresse=idadresse WHERE idadresse =?")
+            $stmt = $con->prepare("SELECT u.iduser,u.email,date_format(u.geburtsdatum, '%d.%m.%Y'), ad.strasse, ad.hausnummer, ad.plz, ad.ort FROM adresse ad INNER JOIN user u ON adresse_idadresse=idadresse WHERE iduser =?")
                     or die("<b>Prepare Error: </b>" . $this->con->error);
-            $stmt->bind_param("i", $_SESSION["userad"]);
+            $stmt->bind_param("i", $_SESSION["usersession"]);
             $stmt->execute();
             $stmt->bind_result($idUser, $email, $geburtsdatum, $strasse, $hausnummer, $plz, $ort);
-            $ad=$_SESSION["userad"];
+
             if ($stmt->fetch()) {
-                
+
                 print("
                         <form action='./jobs/updateuser_job.php' method='POST' enctype='multipart/form-data'>
                       
@@ -49,14 +49,11 @@ if ($_SESSION["loginOK"] != true) {
                 Password** <br><input type='Password' size='20' value='' name='passwort' ><br><br>
                 <input type='submit' value='Update!'>
                 <br>
-                <br> session
-                '$ad'<br>
                 * = optional<br>
                 ** = erforderlich<br>
                 <a href='./jobs/logout.php'>Logout!</a><br>
                 </form>
                 ");
-                
             }
             ?>
         </body>

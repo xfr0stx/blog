@@ -39,23 +39,22 @@ if ($_SESSION["loginOK"] != true) {
             <a href="userprofile.php">UserProfile bearbeiten!</a>
             <?php
             include_once "db/dbcon.php";
-            
+
             $stmt = $con->prepare("SELECT ideintrag, titel, eintrag, eintragdatum, email, iduser, kommentare, iduser FROM v_kommentare;")
                     or die("<b>Prepare Error: </b>" . $con->error);
             $stmt->execute();
-            $stmt->bind_result($ideintrag, $titel, $eintrag, $eintragdatum, $email, $iduser ,$kommentare, $iduser);
+            $stmt->bind_result($ideintrag, $titel, $eintrag, $eintragdatum, $email, $iduser, $kommentare, $iduser);
             echo '<br>';
             echo '<br>';
-            $sess = $_SESSION['userad'];         
+
             while ($stmt->fetch()) {
-                echo '<p> Usersession'.$sess.'<p>';
                 echo '<div style="text-align: justify">';
                 echo '<h2>' . $titel . '</h2>';
                 echo '<p align="center">Posted am: ' . $eintragdatum . '.</p>';
                 echo '<p align="center">von: ' . $email . '</p>';
-                if(file_exists("img/" . $iduser . ".jpg")){
+                if (file_exists("img/" . $iduser . ".jpg")) {
                     echo "<p align='center'><img src='img/$iduser.jpg' class='avatar'></p>";
-                } elseif(file_exists("img/" . $iduser . ".gif")) {
+                } elseif (file_exists("img/" . $iduser . ".gif")) {
                     echo "<p align='center'><img src='img/$iduser.gif' class='avatar'></p>";
                 } else {
                     echo "<p align='center'><img src='img/default.jpg' class='avatar'></p>";

@@ -20,31 +20,30 @@ if ($_SESSION["loginOK"] != true) {
         </head>
         <body>
             <h1>Poste dein Kommentar!</h1>
-            
+
             <form action="./jobs/kommentar_posten.php" method="POST">
 
-               <br> <textarea name="kommentar" cols="50" rows="10" value="" style="width: 621px; height: 186px;;"></textarea> <br>
-               <input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>">
+                <br> <textarea name="kommentar" cols="50" rows="10" value="" style="width: 621px; height: 186px;;"></textarea> <br>
+                <input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>">
                 <input type="submit" value="Posten!">
             </form> 
             <a href="./jobs/logout.php">Logout!</a><br>
             <a href="blog.php">Zurück zum Blog!</a>
             <?php
             include_once "db/dbcon.php";
-            #$id = $_GET["id"];
-           
+
             $stmt = $con->prepare("SELECT eintrag.titel, kommentar.kommentar,kommentar.datum, user.email FROM kommentar JOIN eintrag ON kommentar.eintrag_ideintrag = eintrag.ideintrag JOIN user ON kommentar.user_iduser = user.idUser WHERE ideintrag = ? ORDER BY kommentar.idanswere  DESC;")
                     or die("<b>Prepare Error: </b>" . $this->con->error);
             $stmt->bind_param("s", $_GET["id"]);
             $stmt->execute();
-            
-            $stmt->bind_result($titel,$kommentar,$datum,$email);
+
+            $stmt->bind_result($titel, $kommentar, $datum, $email);
             echo '<br>';
             echo '<br>';
             while ($stmt->fetch()) {
-                
+
                 echo '<div style="text-align: justify">';
-                echo '<p align="center">Posted am: ' . $datum. '.</p>';
+                echo '<p align="center">Posted am: ' . $datum . '.</p>';
                 echo '<p align="center">von: ' . $email . '</p>';
                 echo '<table style="word-break:break-all;word-wrap:break-word" border="1" align="center" width="300">';
                 echo '<tr><td width ="300" valign="top">' . $kommentar . '</td></tr>';
