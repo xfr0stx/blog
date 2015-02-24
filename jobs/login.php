@@ -29,7 +29,7 @@ if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {
         $_SESSION["loginOK"] = true;
         $_SESSION['email'] = $email;
         $_SESSION['usersession'] = $uid;
-        $_SESSION["userad"] = $idadresse;
+        $_SESSION['userad'] = $idadresse;
         $stmt->close();
         header("Location: ../blog.php");
     } else {

@@ -100,9 +100,9 @@ erhält eine Bestätigung der registrierung.
                  move_uploaded_file($_FILES['upload']['tmp_name'], $_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/blog/img/" . $img);
 
                 
-                $stmt->prepare("UPDATE blog.user SET avatar=CONCAT('img/',?) WHERE idUser=?;")
-                    or die("<b>Prepare Error: </b>" . $con->error);
-                $stmt->bind_param("sd", $img, $idUser);
+                $stmt = $con->prepare("UPDATE blog.user SET avatar=CONCAT('img/',?) WHERE idUser=?;")
+or die("<b>Prepare Error: </b>" . $con->errno . ":" . $con->error);
+$stmt->bind_param("sd", $img, $idUser);
                 $stmt->execute();
                 $stmt->close();
             }

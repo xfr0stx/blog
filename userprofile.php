@@ -29,8 +29,8 @@ if ($_SESSION["loginOK"] != true) {
                     or die("<b>Prepare Error: </b>" . $this->con->error);
             $stmt->bind_param("i", $_SESSION["userad"]);
             $stmt->execute();
-            $stmt->bind_result($iduser, $email, $geburtsdatum, $strasse, $hausnummer, $plz, $ort);
-
+            $stmt->bind_result($idUser, $email, $geburtsdatum, $strasse, $hausnummer, $plz, $ort);
+            $ad=$_SESSION["userad"];
             if ($stmt->fetch()) {
                 
                 print("
@@ -49,9 +49,11 @@ if ($_SESSION["loginOK"] != true) {
                 Password** <br><input type='Password' size='20' value='' name='passwort' ><br><br>
                 <input type='submit' value='Update!'>
                 <br>
-                <br>
-                * = optional
-                ** = erforderlich
+                <br> session
+                '$ad'<br>
+                * = optional<br>
+                ** = erforderlich<br>
+                <a href='./jobs/logout.php'>Logout!</a><br>
                 </form>
                 ");
                 
