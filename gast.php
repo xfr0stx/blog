@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<!-- Die Gast.php zeigt die Einträge für den Gastbenutzer ohne das er Blogeinträge
+vornehmen kann. 
+
+@version final
+@copyright none
+
+-->
 <?php
 session_start();
 if ($_SESSION["loginOK"] != true) {

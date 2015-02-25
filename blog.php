@@ -1,17 +1,18 @@
 <!DOCTYPE html>
+<!-- Die blog.php ist der eigentliche Blog, hier werden alle Blogeinträge inkl. 
+Datum der Erstellung, Benutzername, ggf. Avatar, Titel und Blogeintrag angezeigt.
+Es ist ebenfalls das suchen nach einem Blogtitel möglich. 
+
+@version final
+@copyright none
+
+-->
 <?php
 session_start();
 if ($_SESSION["loginOK"] != true) {
     header("Location: index.php");
 } else {
     ?>
-    <!DOCTYPE html>
-    <!--
-    To change this license header, choose License Headers in Project Properties.
-    To change this template file, choose Tools | Templates
-    and open the template in the editor.
-    -->
-
     <html>
         <head>
             <meta charset="UTF-8">
@@ -52,6 +53,8 @@ if ($_SESSION["loginOK"] != true) {
                 echo '<h2>' . $titel . '</h2>';
                 echo '<p align="center">Posted am: ' . $eintragdatum . '.</p>';
                 echo '<p align="center">von: ' . $email . '</p>';
+//                Falls die Datei im Ordner img/*.gif oder .jpg exististiert wird das Image/Avatar angezeigt und mithilfe von CSS (class)
+//                auf die bestimmte Größe formatiert. Ansonsten wird das default-Bild angezeigt.
                 if (file_exists("img/" . $iduser . ".jpg")) {
                     echo "<p align='center'><img src='img/$iduser.jpg' class='avatar'></p>";
                 } elseif (file_exists("img/" . $iduser . ".gif")) {
@@ -61,6 +64,7 @@ if ($_SESSION["loginOK"] != true) {
                 }
                 echo '<table style="word-break:break-all;word-wrap:break-word" border="1" align="center" width="300">';
                 echo '<tr><td width ="300" valign="top">' . $eintrag . '</td></tr>';
+//                Der ID des Eintrags wird in der Variable id (?ìd=) gespeichert. So kann später über GET die Variable abgefragt werden.
                 echo '<tr><td width ="300" align="right"><p>' . '<a href="kommentare.php?id=' . $ideintrag . '">Kommentare(' . $kommentare . ')</a>' . '</p></td></tr>';
                 echo '</table>';
                 echo '</div>';
