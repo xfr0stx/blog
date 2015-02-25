@@ -4,7 +4,6 @@ session_start();
 if ($_SESSION["loginOK"] != true) {
     header("Location: ../index.php");
 } else {
-
     include_once "../db/dbcon.php";
     $escaped_email = mysqli_real_escape_string($con, $_POST["email"]);
     $new_userpass = $_POST["new_passwort"];
@@ -13,21 +12,16 @@ if ($_SESSION["loginOK"] != true) {
     $hashedpw = hash('sha512', $userpass);
     $escaped_geburtsdatum = mysqli_real_escape_string($con, $_POST["geburtsdatum"]);
     #$convertdate = implode("-", array_reverse(explode('.', $escaped_geburtsdatum)));
-
     $escaped_strasse = mysqli_real_escape_string($con, $_POST["strasse"]);
     $escaped_hausnummer = mysqli_real_escape_string($con, $_POST["hausnummer"]);
     $escaped_plz = mysqli_real_escape_string($con, $_POST["plz"]);
     $escaped_ort = mysqli_real_escape_string($con, $_POST["ort"]);
-
     $idUser = $_SESSION['usersession'];
-
     // aktuelles login passwort ok?
     $stmt = $con->prepare("SELECT email FROM blog.user WHERE idUser = ? AND passwort = ?;")
             or die("<b>Prepare Error: </b>" . $this->con->error);
     $stmt->bind_param("ss", $idUser, $hashedpw);
     $stmt->execute();
-
-
     $error = true;
     if (!$stmt->fetch()) {
         $stmt->close();
@@ -49,7 +43,6 @@ if ($_SESSION["loginOK"] != true) {
             $newpw = $hashedpw;
             $error = ($error or false);
         }
-
         // Adresse updaten
         $stmt = $con->prepare("SELECT idadresse FROM adresse WHERE strasse=? AND hausnummer=? AND plz=? AND ort=?;");
         $stmt->bind_param("sdds", $escaped_strasse, $escaped_hausnummer, $escaped_plz, $escaped_ort);
@@ -64,7 +57,6 @@ if ($_SESSION["loginOK"] != true) {
             $idadresse = $stmt->insert_id;
         }
         $stmt->close();
-
         //avatar update
         if (isset($_FILES['avatarnew'])) {
             $size = $_FILES['avatarnew']['size'];
@@ -77,16 +69,22 @@ if ($_SESSION["loginOK"] != true) {
                     $check = true;
                     $fileend = '.gif';
                 }
-
                 $img = $idUser . $fileend;
                 //unlink('')
                 move_uploaded_file($_FILES['avatarnew']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/blog/img/" . $img);
+                 $img = $idUser . $fileend;
+                move_uploaded_file($_FILES['upload']['tmp_name'], $_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/blog/img/" . $img);
+
+# eingefügt salva
+                $stmt = $con->prepare("UPDATE blog.user SET avatar=CONCAT('img/',?) WHERE idUser=?;")
+                        or die("<b>Prepare Error: </b>" . $con->errno . ":" . $con->error);
+                $stmt->bind_param("sd", $img, $idUser);
+                $stmt->execute();
+                $stmt->close();
             } else {
                 header('Location: ../userprofile.php');
             }
         }
-
-
         // Benutzer updaten
         $_SESSION['userad'] = $idadresse;
         print($escaped_geburtsdatum);

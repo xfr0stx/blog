@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<!-- Der Benutzer wird regsitriert, also in die DB eingetragen und 
-erhält eine Bestätigung der registrierung.
+<!-- Die eintrag_suchen.php ist dazu da, den eingetragen String aus dem Formular von blog.php
+in der Datenbank zu suchen.
+
+@version final
+@copyright none
+
 -->
+
 <html>
     <head>
         <meta charset="UTF-8">
