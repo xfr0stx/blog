@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<!-- Der Benutzer wird regsitriert, also in die DB eingetragen und 
-erhält eine Bestätigung der registrierung.
+<!--  Die register_job.php wird genutzt um User zu registrieren und in die DB einzutragen.
+
+@author Mauro&Willger
+@version final
+@copyright none
+
 -->
 <html>
     <head>
@@ -27,12 +31,14 @@ erhält eine Bestätigung der registrierung.
         // Avatar
         $avatar = false;
         $error = false;
+        # Überprüfen ob ein Avatar it hochgeladen wird und speichern des größe und typ.
         if (isset($_FILES['upload']) && $_FILES['upload']["size"] > 0) {
             $size = $_FILES['upload']['size'];
             $type = $_FILES['upload']['type'];
 
             $checked = false;
-
+            
+            # Überprüfen des Filetyps
             if ($type == 'image/jpeg') {
 
                 $fileend = '.jpg';
@@ -43,7 +49,7 @@ erhält eine Bestätigung der registrierung.
             }
 
 
-            // Dateigröße
+            # Überprüfen der Filegröße (kleiner 100kb) und richtigen Filetyp
             if ($size < 102400 && $check == true) {
                 $avatar = true;
             } else {
@@ -60,20 +66,23 @@ erhält eine Bestätigung der registrierung.
         $user_exists = ($stmt->num_rows() == 1);
         $stmt->free_result();
         $stmt->close();
-
+        
+        # Falls der user existiert ($user_exists = ($stmt->num_rows() == 1)) ausgabe der Meldung und die
+        # Error Variable auf true setzen.
         if ($user_exists) {
             print("<b>Schon vorhanden!</b>");
             $error = true;
         }
-
+        
+        # Falls Error variable nicht true ist führe aus:
         if (!$error) {
 
-            // Adresse updaten
+            # Adresse updaten
             $stmt = $con->prepare("SELECT idadresse FROM adresse WHERE strasse=? AND hausnummer=? AND plz=? AND ort=?;");
             $stmt->bind_param("sdds", $escaped_strasse, $escaped_hausnummer, $escaped_plz, $escaped_ort);
             $stmt->execute();
             $stmt->bind_result($idadresse);
-            // Falls neue Adresse noch nicht vorhanden --> erstellen
+            #  Falls neue Adresse noch nicht vorhanden --> erstellen
             if (!$stmt->fetch()) {
                 $stmt->close();
                 $stmt = $con->prepare("INSERT INTO adresse (strasse, hausnummer, plz, ort) VALUES (?,?,?,?);");
@@ -83,20 +92,21 @@ erhält eine Bestätigung der registrierung.
             }
             $stmt->close();
 
-            var_dump($idadresse);
-
-            // Benutzer hinzufügen
+            
+            # Benutzer hinzufügen
             $stmt = $con->prepare("INSERT INTO user(email,passwort,geburtsdatum,adresse_idadresse) VALUES (?,?,STR_TO_DATE(?,'%Y-%m-%d'),?)")
                     or die("<b>Prepare Error: </b>" . $con->error);
             $stmt->bind_param("sssi", $escaped_email, $hashedpw, $convertdate, $idadresse);
             $stmt->execute();
             $idUser = $con->insert_id;
             $stmt->close();
-            var_dump($idUser);
+            
 
-            // Avatar hochladen und updaten
+            #  Avatar hochladen und updaten
             if ($avatar) {
+                # Das Avatar bekommt den namen "iduser"."filetyp"
                 $img = $idUser . $fileend;
+                # Hochladen der Datei in /blog/img
                 move_uploaded_file($_FILES['upload']['tmp_name'], $_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/blog/img/" . $img);
 
 

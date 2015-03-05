@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<!--  Die updateuser_job.php wird genutzt um Userprofile zu aktualisieren.
+
+@author Mauro&Willger
+@version final
+@copyright none
+
+-->
 <?php
 session_start();
 if ($_SESSION["loginOK"] != true) {
@@ -11,13 +18,14 @@ if ($_SESSION["loginOK"] != true) {
     $userpass = $_POST["passwort"];
     $hashedpw = hash('sha512', $userpass);
     $escaped_geburtsdatum = mysqli_real_escape_string($con, $_POST["geburtsdatum"]);
-    #$convertdate = implode("-", array_reverse(explode('.', $escaped_geburtsdatum)));
+    
     $escaped_strasse = mysqli_real_escape_string($con, $_POST["strasse"]);
     $escaped_hausnummer = mysqli_real_escape_string($con, $_POST["hausnummer"]);
     $escaped_plz = mysqli_real_escape_string($con, $_POST["plz"]);
     $escaped_ort = mysqli_real_escape_string($con, $_POST["ort"]);
     $idUser = $_SESSION['usersession'];
-    // aktuelles login passwort ok?
+    
+    # aktuelles login passwort ok? wird benötigt um das profile zu updaten
     $stmt = $con->prepare("SELECT email FROM blog.user WHERE idUser = ? AND passwort = ?;")
             or die("<b>Prepare Error: </b>" . $this->con->error);
     $stmt->bind_param("ss", $idUser, $hashedpw);
@@ -30,7 +38,8 @@ if ($_SESSION["loginOK"] != true) {
         $error = false;
     } else {
         $stmt->close();
-        // neues passwort?
+        # neues passwort? Falls ja neues Passwort setzen. Dabei muss das alte PW zwei mal eingegeben werden
+        # Beide PWs werden vergliechen
         if ($new_userpass != "") {
             if ($new_userpass == $new_userpass2) {
                 $newpw = hash('sha512', $new_userpass);
@@ -40,15 +49,17 @@ if ($_SESSION["loginOK"] != true) {
                 return;
             }
         } else {
+        # Falls kein neues PW eingegeben wird ist das neuepw das alte
             $newpw = $hashedpw;
             $error = ($error or false);
         }
-        // Adresse updaten
+        # Adresse updaten
         $stmt = $con->prepare("SELECT idadresse FROM adresse WHERE strasse=? AND hausnummer=? AND plz=? AND ort=?;");
         $stmt->bind_param("sdds", $escaped_strasse, $escaped_hausnummer, $escaped_plz, $escaped_ort);
         $stmt->execute();
         $stmt->bind_result($idadresse);
-        // Falls neue Adresse noch nicht vorhanden --> erstellen
+        
+        # Falls neue Adresse noch nicht vorhanden --> erstellen
         if (!$stmt->fetch()) {
             $stmt->close();
             $stmt = $con->prepare("INSERT INTO adresse (strasse, hausnummer, plz, ort) VALUES (?,?,?,?);");
@@ -57,7 +68,7 @@ if ($_SESSION["loginOK"] != true) {
             $idadresse = $stmt->insert_id;
         }
         $stmt->close();
-        //avatar update
+        # Falls ein neues Avatar gesetzt wird setzen -> vorgehen wie in register_job
         if (isset($_FILES['avatarnew'])) {
             $size = $_FILES['avatarnew']['size'];
             $type = $_FILES['avatarnew']['type'];
@@ -70,12 +81,12 @@ if ($_SESSION["loginOK"] != true) {
                     $fileend = '.gif';
                 }
                 $img = $idUser . $fileend;
-                //unlink('')
+                
                 move_uploaded_file($_FILES['avatarnew']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/blog/img/" . $img);
                  $img = $idUser . $fileend;
                 move_uploaded_file($_FILES['upload']['tmp_name'], $_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/blog/img/" . $img);
 
-# eingefügt salva
+                # Updaten des Avatars
                 $stmt = $con->prepare("UPDATE blog.user SET avatar=CONCAT('img/',?) WHERE idUser=?;")
                         or die("<b>Prepare Error: </b>" . $con->errno . ":" . $con->error);
                 $stmt->bind_param("sd", $img, $idUser);
@@ -85,7 +96,7 @@ if ($_SESSION["loginOK"] != true) {
                 header('Location: ../userprofile.php');
             }
         }
-        // Benutzer updaten
+        # Benutzer updaten
         $_SESSION['userad'] = $idadresse;
         print($escaped_geburtsdatum);
         $stmt = $con->prepare("UPDATE blog.user SET geburtsdatum=str_to_date(?, '%d.%m.%Y'), email=?, passwort=?, adresse_idadresse=? WHERE idUser=?;");
