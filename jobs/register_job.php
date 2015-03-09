@@ -119,6 +119,7 @@
             print("Regestrierung erfolgreich!<br>");
         }
         ?>
+        <h1>DelaCom's | IT-Blog</h1><br>
         Zurück zur
         <a href="../index.php">Anmeldung!</a>
 

@@ -43,7 +43,7 @@ if ($_SESSION["loginOK"] != true) {
             while ($stmt->fetch()) {
 //Ausgabe vom Kommentar, datum und email.
                 echo '<div style="text-align: justify">';
-                echo '<p align="center">Posted am: ' . $datum . '.</p>';
+                echo '<p align="center">Posted am: ' . $datum_deutsch =date('d.m.Y H:i:s' ,strtotime($datum)) . '.</p>';
                 echo '<p align="center">von: ' . $email . '</p>';
                 echo '<table style="word-break:break-all;word-wrap:break-word" border="1" align="center" width="300">';
                 echo '<tr><td width ="300" valign="top">' . $kommentar . '</td></tr>';

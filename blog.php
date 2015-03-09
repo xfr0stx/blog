@@ -47,7 +47,8 @@ if ($_SESSION["loginOK"] != true) {
             $stmt->bind_result($ideintrag, $titel, $eintrag, $eintragdatum, $email, $iduser, $kommentare, $iduser);
             echo '<br>';
             echo '<br>';
-            
+            echo '<b><u>Sie sind angemeldet als:</u></b> ';
+            echo $_SESSION['email'];
             while ($stmt->fetch()) {
                 echo '<div style="text-align: justify">';
                 echo '<h2>' . $titel . '</h2>';
