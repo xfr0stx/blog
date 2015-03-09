@@ -42,11 +42,12 @@
         dazu werden die eigentlichen "Input-Types" ausgewählt, die Größe des Feldes definiert und mit required 
         die Eingabe auf "Erforderlich" gesetzt. Nach dem Drücken des Buttons "submit" werden die Informationen
         über die methode "POST" (verschicken) direkt an den Webserver gesendet und kann dort weiterverarbeitet werden-->
+        <div id="login">
         <form action="./jobs/login.php" method="POST">
-            E-Mail: <input type="text" size="20" value="" name="email" required><br><br>
-            Passwort: <input type="Password" size="20" value="" name="passwort" required ><br>
+            E-Mail: <input type="text" size="20" value="" placeholder ="email" name="email" required><br><br>
+            Passwort: <input type="Password" size="20" value="" placeholder ="passwort" name="passwort" required ><br>
             <input type="submit" csvalue="Senden">
-        </form>
+        </form> </div>
         <a href="register.php">Registrieren</a><br>
 
 

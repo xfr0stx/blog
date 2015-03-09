@@ -23,11 +23,12 @@ $stmt->bind_param("ss", $escaped_email, $hashedpw);
 $stmt->execute();
 $stmt->bind_result($uid, $email, $idadresse);
 
-# Überprüfen ob man sich mit gast einloggt. Session wird gestartet.
+# Überprüfen ob man sich mit gast einloggt. Session wird mit gastF gestartet.
 if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {
     session_start();
     $_SESSION["loginOK"] = true;
-    header("Location: ../gast.php");
+    header("Location: ../blog.php");
+    $_SESSION['email'] = "gast";
 } else {
 
 # Einloggen mit dem Benutzer und starten einer Session. Dabei werden verschiedene Werte in die Session Variable gespeichert
