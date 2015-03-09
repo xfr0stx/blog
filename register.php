@@ -48,6 +48,7 @@ des Avatars, benötigt.
             <br />
             * = optional
         </table>
+        Zurück zum <a href="index.php">Login!</a>
         <?php
         ?>
     </body>

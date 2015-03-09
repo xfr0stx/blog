@@ -47,11 +47,12 @@ if ($_SESSION["loginOK"] != true) {
             $stmt->bind_result($ideintrag, $titel, $eintrag, $eintragdatum, $email, $iduser, $kommentare, $iduser);
             echo '<br>';
             echo '<br>';
-
+            
             while ($stmt->fetch()) {
                 echo '<div style="text-align: justify">';
                 echo '<h2>' . $titel . '</h2>';
-                echo '<p align="center">Posted am: ' . $eintragdatum . '.</p>';
+                // strototime Wandelt die Uhrzeit in das deutsche Datum - Zeitformat um.
+                echo '<p align="center">Posted am: ' . $datum_deutsch =date('d.m.Y H:i:s' ,strtotime($eintragdatum)) . '.</p>';
                 echo '<p align="center">von: ' . $email . '</p>';
 //                Falls die Datei im Ordner img/*.gif oder .jpg exististiert wird das Image/Avatar angezeigt und mithilfe von CSS (class)
 //                auf die bestimmte Größe formatiert. Ansonsten wird das default-Bild angezeigt.
