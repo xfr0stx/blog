@@ -37,7 +37,9 @@ if ($_SESSION["loginOK"] != true) {
                 echo '<br>';
                 echo '<table  border ="0" align="center" >';
                 echo '<td valign="top" >';
-                echo '<b><u>Sie sind angemeldet als:</u></b><br> ';
+                 echo '<h2>-=Input=-</h2>';
+               echo'  <hr style="background-color:grey;"noshade width="300" align="center"> ';
+                              echo '<b><u>Sie sind angemeldet als:</u></b><br> ';
                 echo $_SESSION['email'];
                 if (file_exists("img/" . $uuid . ".jpg")) {
                     echo "<p align='center'><img src='img/$uuid.jpg' class='avatar'></p>";
@@ -53,15 +55,15 @@ if ($_SESSION["loginOK"] != true) {
                 echo'  <hr style="background-color:black;"noshade width="300" align="center">
                   
             <form action="./jobs/eintrag_posten.php" method="POST">
-                Title<br> <input type="text" size="20" value="" maxlength ="20" name="titel"><br><br />
-                Beitrag<br> <textarea name="eintrag" cols="50" rows="10" value="" style="width: 300px; height: 186px;;"></textarea> <br>
+                Titel<br> <input type="text" size="20" value="" placeholder ="max. 20 Zeichen" maxlength ="20" name="titel"><br><br />
+                Blogeintrag<br> <textarea name="eintrag" cols="50" rows="10" value="" style="width: 300px; height: 186px;;"></textarea> <br>
                 <input type="submit" value="Posten!">
             </form>
             <br>
             <hr noshade width="300" size="3" align="center">
 
             <form action="./jobs/eintrag_suchen.php" method="POST">
-                Eintrag suchen:<br> <input type="text" size="20" value="" name="search"><br><br>
+                Titel suchen:<br> <input type="text" size="20" value="" name="search"><br><br>
                 <input type="submit" value="Search!">
             </form>            
             <hr noshade width="300" size="3" align="center">
@@ -70,9 +72,10 @@ if ($_SESSION["loginOK"] != true) {
             <a href="userprofile.php">UserProfile bearbeiten!</a>
             </table>
             </td>
-            <td width ="30"> </td>
+            <td width ="30" align  valign="top"><p><img src="img/linie.png"></p> </td>
             <td valign="top" >
-            <h2>-=Blogeinträge=-</h2>';
+            <h2>-=Blogeinträge=-</h2>
+            <hr style="background-color:grey;"noshade width="300" align="center">' ;
 
 
                 while ($stmt->fetch()) {
@@ -102,6 +105,7 @@ if ($_SESSION["loginOK"] != true) {
                     echo '<hr noshade width="300" size="3" align="center">';
                 }
             } else {
+               
                 echo '<b><u>Sie sind angemeldet als: Gast</u></b><br><br>';
                 echo'<a href="./jobs/logout.php">Logout!</a><br>';
                 while ($stmt->fetch()) {

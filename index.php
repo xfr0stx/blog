@@ -34,7 +34,7 @@
     </head>
     <body>
         <!-- <h"x"> Gibt eine Überschrift an, das Layout wird der CSS-Datei entnommen. -->
-        <h1>DeltaCom's | IT-Blog</h1><br>
+        <h1>|)eltaCom's | IT-Blog</h1><br>
         Bitte melden Sie sich an um einen Eintrag zu posten:
         <!-- <p> leitet einen Textabsatz ein. -->
         <p>Gäste haben nur Lesezugang (User:gast - PW:gast)!</p>
