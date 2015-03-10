@@ -16,7 +16,7 @@ des Avatars, benötigt.
         <h1>Regstriere dich!</h1><br>
         Bitte vervollständige die folgenden Einträge:
 
-        <table border="1" style="width:30%" align="center">
+        <table  border="0" style="width:20%" align="center">
             <form action="./jobs/register_job.php" method="POST" enctype="multipart/form-data">
                 <!--Es erfolgt die Eingabe und das Senden/Uploaden der Userdaten mit folgenden erforderlichen Kriterien:
                 Email = als email format [..]@[..].[]
@@ -27,7 +27,8 @@ des Avatars, benötigt.
                 
                 Das Ganze erfolgt in einer Tabelle <table> im Zentrum "center" des Bildschirms.
                 -->
-                <td align="center">
+                <td  bgcolor="#E2E6E9" align="center">
+                    <FONT COLOR="#5B496E">
                     <label for="email">Email</label><br />
                     <input type="email" size="20" value="" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
                     <label for="password">Passwort (min. 5 Zeichen)</label><br />
@@ -43,6 +44,7 @@ des Avatars, benötigt.
                     <label for="upload">Avatar* </label><br />
                     <input type="file" name="upload"><br><br />
                     <input type="submit" value="Senden" name="submit">
+                    </font>
                 </td>
             </form>
             <br />

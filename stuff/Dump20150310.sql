@@ -29,7 +29,7 @@ CREATE TABLE `adresse` (
   `plz` int(5) DEFAULT NULL,
   `ort` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idadresse`)
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `adresse` (
 
 LOCK TABLES `adresse` WRITE;
 /*!40000 ALTER TABLE `adresse` DISABLE KEYS */;
-INSERT INTO `adresse` VALUES (93,'Haupstraße',55,54290,'Trier'),(94,'Engel',12,54290,'Dudeldorf'),(95,'Engel',55,54290,'Trier'),(96,'Haupstraße11',55,54290,'Trier'),(97,'Haupstraßee',55,54290,'Trier'),(98,'Haupstraßes',1,54290,'Trier'),(99,'Haupstraßeee',55,54290,'Trier'),(100,'Engelstraßeew',12,54290,'Trier'),(101,'Haupstraßeeee',55,54290,'Trier');
+INSERT INTO `adresse` VALUES (93,'Haupstraße',55,54290,'Trier'),(94,'Engel',12,54290,'Dudeldorf'),(95,'Engel',55,54290,'Trier'),(96,'Haupstraße11',55,54290,'Trier'),(97,'Haupstraßee',55,54290,'Trier'),(98,'Haupstraßes',1,54290,'Trier'),(99,'Haupstraßeee',55,54290,'Trier'),(100,'Engelstraßeew',12,54290,'Trier'),(101,'Haupstraßeeee',55,54290,'Trier'),(102,'Michtianstr',55,55555,'Trier'),(103,'Dingdong',1234,12345,'Trier'),(104,'Histraße',33,12345,'GOndorf'),(105,'Ostallee',33,54290,'Trier'),(106,'Haupstraßeea',55,54290,'Trier'),(107,'Ostalle',33,54290,'Trier');
 /*!40000 ALTER TABLE `adresse` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +58,7 @@ CREATE TABLE `eintrag` (
   PRIMARY KEY (`ideintrag`),
   KEY `fk_eintrag_user1_idx` (`user_idUser`),
   CONSTRAINT `fk_eintrag_user1` FOREIGN KEY (`user_idUser`) REFERENCES `user` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `eintrag` (
 
 LOCK TABLES `eintrag` WRITE;
 /*!40000 ALTER TABLE `eintrag` DISABLE KEYS */;
-INSERT INTO `eintrag` VALUES (65,'blubb','Text TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText Text','2015-02-24 07:53:40',108),(66,'blub3','Text TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText Text TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText Text TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText ','2015-02-24 07:56:24',110),(67,'blubb2','dskfjlasdkjf Textdskfjlasdkjf Textdskfjlasdkjf Textdskfjlasdkjf Textdskfjlasdkjf Text','2015-02-24 15:33:25',113),(68,'Test','adsfadsf','2015-02-25 14:30:19',108),(69,'Doing','Doing!1','2015-02-25 14:36:05',114),(70,'blubb2','alksdjfsakldjflksad sdaf mklsdajf asdf asd fsadf','2015-02-25 14:40:01',113),(71,'mauri','Mauri rockz like hell!','2015-03-04 07:27:16',115),(72,'Dingens','dsakfjaklsdfj asdlkfj asdlkfj asdf asd fsadf asdf ','2015-03-05 08:36:41',108);
+INSERT INTO `eintrag` VALUES (65,'blubb','Text TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText Text','2015-02-24 07:53:40',108),(66,'blub3','Text TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText Text TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText Text TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText TextText ','2015-02-24 07:56:24',110),(67,'blubb2','dskfjlasdkjf Textdskfjlasdkjf Textdskfjlasdkjf Textdskfjlasdkjf Textdskfjlasdkjf Text','2015-02-24 15:33:25',113),(68,'Test','adsfadsf','2015-02-25 14:30:19',108),(69,'Doing','Doing!1','2015-02-25 14:36:05',114),(70,'blubb2','alksdjfsakldjflksad sdaf mklsdajf asdf asd fsadf','2015-02-25 14:40:01',113),(71,'mauri','Mauri rockz like hell!','2015-03-04 07:27:16',115),(72,'Dingens','dsakfjaklsdfj asdlkfj asdlkfj asdf asd fsadf asdf ','2015-03-05 08:36:41',108),(73,'Blubbi','Hey heute ist ein schöner tag .)','2015-03-09 17:35:56',108),(74,'','','2015-03-09 17:36:02',108),(75,'TEst','asdfasdfasdf asdf asdf','2015-03-09 17:36:48',108),(76,'JJ','HEyho','2015-03-09 17:49:11',116),(77,'wer','ef','2015-03-09 18:20:25',116),(78,'ding','dong','2015-03-09 18:25:04',116),(79,'dfsf','asdfasdf','2015-03-09 19:29:29',108),(80,'Testk k ','kkkkkk','2015-03-09 19:38:44',118),(81,'Bbu','buasdbfkjysdlfs ja','2015-03-09 20:11:02',108),(82,'hj','ghjhj','2015-03-10 07:47:53',108),(83,'55','adsfjk ladsjflk asdjfä alsdjfälsakafj äsldajkf äsadjf ','2015-03-10 08:29:24',119),(84,'','','2015-03-10 09:28:01',108),(85,'555555','so das hier ist auch nochmal ein test','2015-03-10 09:53:29',119),(86,'Test  bla','adsjfldsakjf klasdfj sakldfj asdsadkf','2015-03-10 10:33:23',108);
 /*!40000 ALTER TABLE `eintrag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +89,7 @@ CREATE TABLE `kommentar` (
   KEY `fk_kommentar_user1_idx` (`user_idUser`),
   CONSTRAINT `fk_answere_eintrag1` FOREIGN KEY (`eintrag_ideintrag`) REFERENCES `eintrag` (`ideintrag`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_kommentar_user1` FOREIGN KEY (`user_idUser`) REFERENCES `user` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `kommentar` (
 
 LOCK TABLES `kommentar` WRITE;
 /*!40000 ALTER TABLE `kommentar` DISABLE KEYS */;
-INSERT INTO `kommentar` VALUES (30,'Testi :)','2015-03-04 07:28:08',71,115),(31,'Dingens!','2015-03-04 07:28:33',71,108);
+INSERT INTO `kommentar` VALUES (30,'Testi :)','2015-03-04 07:28:08',71,115),(31,'Dingens!','2015-03-04 07:28:33',71,108),(32,'testestest','2015-03-09 18:05:14',76,116),(33,'55','2015-03-09 18:53:05',76,108),(34,'asdfsaf','2015-03-09 19:29:37',79,108),(35,'kkkkk','2015-03-09 19:38:55',79,118),(36,'5545','2015-03-09 20:11:16',81,108),(37,'fgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfgfgfdg sdfg sdfgsfdgsdfg','2015-03-10 08:29:46',83,119),(38,'Kommentar 1 :)','2015-03-10 09:54:00',85,119);
 /*!40000 ALTER TABLE `kommentar` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,7 +119,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`idUser`),
   KEY `fk_user_adresse1_idx` (`adresse_idadresse`),
   CONSTRAINT `fk_user_adresse1` FOREIGN KEY (`adresse_idadresse`) REFERENCES `adresse` (`idadresse`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +128,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (108,'1986-08-16','blubb@bla.de','3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2','img/108.jpg',101),(109,'1989-11-11','blubb1@bla.de','3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2','img/109.jpg',94),(110,'1986-08-16','blub3@bla.de','3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2','img/110.jpg',93),(111,'1986-08-16','blub4@bla.de','3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2','img/111.jpg',95),(112,'1986-08-16','blub5@bla.de','3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2',NULL,96),(113,'1986-08-16','blubb2@bla.de','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79','img/113.jpg',97),(114,'1986-08-16','blubb6@bla.de','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79','img/114.jpg',98),(115,'1986-08-16','sal@mauri.de','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79','img/115.jpg',100);
+INSERT INTO `user` VALUES (108,'1986-08-16','blubb@bla.de','3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2','img/108',106),(109,'1989-11-11','blubb1@bla.de','3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2','img/109.jpg',94),(110,'1986-08-16','blub3@bla.de','3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2','img/110.jpg',93),(111,'1986-08-16','blub4@bla.de','3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2','img/111.jpg',95),(112,'1986-08-16','blub5@bla.de','3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2',NULL,96),(113,'1986-08-16','blubb2@bla.de','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79','img/113.jpg',97),(114,'1986-08-16','blubb6@bla.de','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79','img/114.jpg',98),(115,'1986-08-16','sal@mauri.de','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79','img/115.jpg',100),(116,'1988-08-13','j@j.de','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79','img/116.jpg',102),(117,'1999-12-12','h@h.de','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79',NULL,103),(118,'1933-01-01','k@k.de','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79',NULL,104),(119,'1986-08-16','5@5.de','ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413','img/119',107);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,4 +179,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-03-09 13:47:52
+-- Dump completed on 2015-03-10 10:47:56

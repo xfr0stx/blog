@@ -28,7 +28,7 @@ if ($_SESSION["loginOK"] != true) {
                  zurückgegeben.-->
             <?php
             if (array_key_exists('error', $_GET)) {
-                print("Falscher Passwort eingegeben!");
+                print("Falsches Passwort eingegeben !");
             } elseif (array_key_exists('error2', $_GET)) {
                 print("Die beiden neuen Passwörter passen nicht!");
             }

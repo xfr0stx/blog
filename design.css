@@ -15,20 +15,20 @@ h2 {
 body {
     font-size: 62.5%; /* Resets 1em to 10px */
     font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
-    background: #999966;
+    background: #062E46;
     color: whitesmoke;
     text-align: Center;
 }
 
 input:focus, textarea:focus {
-    background-color: grey;
+    background-color: #849BAD;
 }
 
 a:link {
-    color: #000000;
+    color: gray;
 }
 a:visited {
-    color: #000000;
+    color: gray;
 }
 
 a:hover {
@@ -43,8 +43,9 @@ a:hover {
             width: 20%;
             margin-left: auto;
             margin-right: auto;
+            color: #5B496E;
              border-color:#cccccc;
-             background: burlywood;
+             background: #E2E6E9;
              border-style:solid;
              text-align:center; 
              border-radius:17px;
@@ -54,4 +55,25 @@ a:hover {
              box-shadow: 1px 0px 20px 0px rgba(42,42,42,.55);
              text-shadow:1px 0px 0px rgba(42,42,42,.75); 
 } 
-	
+
+#abutton{
+    	border : solid 1px #ffffff;
+	border-radius : 10px;
+	moz-border-radius : 10px;
+	font-size : 14px;
+	color : #000000;
+	padding : 2px 10px;
+	background-color : #d6d6d6;
+        
+}
+
+#abutton:hover{
+    	border : solid 1px #ffffff;
+	border-radius : 10px;
+	moz-border-radius : 10px;
+	font-size : 14px;
+	color : #000000;
+	padding : 2px 10px;
+	background-color : #7F7F7F;
+        
+}

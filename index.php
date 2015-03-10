@@ -34,7 +34,7 @@
     </head>
     <body>
         <!-- <h"x"> Gibt eine Überschrift an, das Layout wird der CSS-Datei entnommen. -->
-        <h1>DelaCom's | IT-Blog</h1><br>
+        <h1>DeltaCom's | IT-Blog</h1><br>
         Bitte melden Sie sich an um einen Eintrag zu posten:
         <!-- <p> leitet einen Textabsatz ein. -->
         <p>Gäste haben nur Lesezugang (User:gast - PW:gast)!</p>
@@ -43,12 +43,12 @@
         die Eingabe auf "Erforderlich" gesetzt. Nach dem Drücken des Buttons "submit" werden die Informationen
         über die methode "POST" (verschicken) direkt an den Webserver gesendet und kann dort weiterverarbeitet werden-->
         <div id="login">
-        <form action="./jobs/login.php" method="POST">
-            E-Mail: <input type="text" size="20" value="" placeholder ="email" name="email" required><br><br>
-            Passwort: <input type="Password" size="20" value="" placeholder ="passwort" name="passwort" required ><br>
-            <input type="submit" csvalue="Senden">
-        </form> </div>
-        <a href="register.php">Registrieren</a><br>
+            <form action="./jobs/login.php" method="POST">
+                E-Mail: <input type="text" size="20" value="" placeholder ="Em@il" name="email" required><br><br>
+                Passwort: <input type="Password" size="20" value="" placeholder ="Passwort" name="passwort" required ><br>
+                <input type="submit" csvalue="Senden">
+            </form> </div><br><br>
+        <a id="abutton" href="register.php">Registrieren</a><br>
 
 
         <?php

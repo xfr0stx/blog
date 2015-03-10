@@ -29,18 +29,32 @@ if ($_SESSION["loginOK"] != true) {
                     or die("<b>Prepare Error: </b>" . $con->error);
             $stmt->execute();
             $stmt->bind_result($ideintrag, $titel, $eintrag, $eintragdatum, $email, $iduser, $kommentare, $iduser);
-            echo '<br>';
-            echo '<br>';
-            echo '<b><u>Sie sind angemeldet als:</u></b> ';
-            echo $_SESSION['email'];
-            echo '<br><br>';
-            
-            // es wird überprüft wer eingeloggt ist und dann entsprechend das blog ausgegeben
+
             if ($_SESSION['email'] != 'gast') {
-                echo'  <hr style="background-color:black;"noshade width="500" align="center">
+                $uuid = $_SESSION['usersession'];
+
+                echo '<br>';
+                echo '<br>';
+                echo '<table  border ="0" align="center" >';
+                echo '<td valign="top" >';
+                echo '<b><u>Sie sind angemeldet als:</u></b><br> ';
+                echo $_SESSION['email'];
+                if (file_exists("img/" . $uuid . ".jpg")) {
+                    echo "<p align='center'><img src='img/$uuid.jpg' class='avatar'></p>";
+                } elseif (file_exists("img/" . $uuid . ".gif")) {
+                    echo "<p align='center'><img src='img/$uuid.gif' class='avatar'></p>";
+                } else {
+                    echo "<p align='center'><img src='img/default.jpg' class='avatar'></p>";
+                }
+                echo '<table style="word-break:break-all;word-wrap:break-word" border="0" align="center" width="300">';
+                echo '<br><br>';
+                // es wird überprüft wer eingeloggt ist und dann entsprechend das blog ausgegeben
+
+                echo'  <hr style="background-color:black;"noshade width="300" align="center">
+                  
             <form action="./jobs/eintrag_posten.php" method="POST">
-                Title<br> <input type="text" size="20" value="" name="titel"><br><br />
-                Beitrag<br> <textarea name="eintrag" cols="50" rows="10" value="" style="width: 621px; height: 186px;;"></textarea> <br>
+                Title<br> <input type="text" size="20" value="" maxlength ="20" name="titel"><br><br />
+                Beitrag<br> <textarea name="eintrag" cols="50" rows="10" value="" style="width: 300px; height: 186px;;"></textarea> <br>
                 <input type="submit" value="Posten!">
             </form>
             <br>
@@ -53,7 +67,14 @@ if ($_SESSION["loginOK"] != true) {
             <hr noshade width="300" size="3" align="center">
             <br>
             <a href="./jobs/logout.php">Logout!</a><br>
-            <a href="userprofile.php">UserProfile bearbeiten!</a>';
+            <a href="userprofile.php">UserProfile bearbeiten!</a>
+            </table>
+            </td>
+            <td width ="30"> </td>
+            <td valign="top" >
+            <h2>-=Blogeinträge=-</h2>';
+
+
                 while ($stmt->fetch()) {
 
                     echo '<div style="text-align: justify">';
@@ -70,16 +91,21 @@ if ($_SESSION["loginOK"] != true) {
                     } else {
                         echo "<p align='center'><img src='img/default.jpg' class='avatar'></p>";
                     }
-                    echo '<table style="word-break:break-all;word-wrap:break-word" border="1" align="center" width="300">';
-                    echo '<tr><td width ="300" valign="top">' . $eintrag . '</td></tr>';
-//                Der ID des Eintrags wird in der Variable id (?ìd=) gespeichert. So kann später über GET die Variable abgefragt werden.
-                    echo '<tr><td width ="300" align="right"><p>' . '<a href="kommentare.php?id=' . $ideintrag . '">Kommentare(' . $kommentare . ')</a>' . '</p></td></tr>';
+                    echo '<table style="word-break:break-all;word-wrap:break-word" border="0" align="center" width="300">';
+
+                    echo '<tr><td bgcolor ="#E2E2E2" width ="300" valign="top"><FONT COLOR="#5B496E">' . $eintrag . '</td></tr>';
+//                Der ID des Eintrags wird in der Variable id (?id=) gespeichert. So kann später über GET die Variable abgefragt werden.
+                    echo '<tr><td bgcolor="#A1B5C6" width ="300" align="right"><FONT COLOR="#5B496E">' . '<a href="kommentare.php?id=' . $ideintrag . '">Kommentare(' . $kommentare . ')</a>' . '</p></td></tr>';
+
                     echo '</table>';
                     echo '</div>';
+                    echo '<hr noshade width="300" size="3" align="center">';
                 }
             } else {
+                echo '<b><u>Sie sind angemeldet als: Gast</u></b><br><br>';
+                echo'<a href="./jobs/logout.php">Logout!</a><br>';
                 while ($stmt->fetch()) {
-                    echo'<a href="./jobs/logout.php">Logout!</a><br>';
+
 
                     echo '<div style="text-align: justify">';
                     echo '<h2>' . $titel . '</h2>';
@@ -92,11 +118,14 @@ if ($_SESSION["loginOK"] != true) {
                     } else {
                         echo "<p align='center'><img src='img/default.jpg' class='avatar'></p>";
                     }
-                    echo '<table style="word-break:break-all;word-wrap:break-word" border="1" align="center" width="300">';
-                    echo '<tr><td width ="300" valign="top">' . $eintrag . '</td></tr>';
-                    echo '<tr><td width ="300" align="right"><p>' . '<a href="kommentare.php?id=' . $ideintrag . '">Kommentare(' . $kommentare . ')</a>' . '</p></td></tr>';
+                    echo '<table style="word-break:break-all;word-wrap:break-word" border="0" align="center" width="300">';
+                    echo '<tr><td bgcolor ="#E2E2E2" width ="300" valign="top"><FONT COLOR="#5B496E">' . $eintrag . '</td></tr>';
+                    echo '<tr><td bgcolor="#A1B5C6" width ="300" align="right"><FONT COLOR="#5B496E">' . '<a href="kommentare.php?id=' . $ideintrag . '">Kommentare(' . $kommentare . ')</a>' . '</p></td></tr>';
                     echo '</table>';
                     echo '</div>';
+                    echo '<hr noshade width="300" size="3" align="center">';
+                    echo '</td>';
+                    echo '</table>';
                 }
             }
             ?>

@@ -18,13 +18,13 @@ if ($_SESSION["loginOK"] != true) {
     $userpass = $_POST["passwort"];
     $hashedpw = hash('sha512', $userpass);
     $escaped_geburtsdatum = mysqli_real_escape_string($con, $_POST["geburtsdatum"]);
-    
+
     $escaped_strasse = mysqli_real_escape_string($con, $_POST["strasse"]);
     $escaped_hausnummer = mysqli_real_escape_string($con, $_POST["hausnummer"]);
     $escaped_plz = mysqli_real_escape_string($con, $_POST["plz"]);
     $escaped_ort = mysqli_real_escape_string($con, $_POST["ort"]);
     $idUser = $_SESSION['usersession'];
-    
+
     # aktuelles login passwort ok? wird benötigt um das profile zu updaten
     $stmt = $con->prepare("SELECT email FROM blog.user WHERE idUser = ? AND passwort = ?;")
             or die("<b>Prepare Error: </b>" . $this->con->error);
@@ -49,7 +49,7 @@ if ($_SESSION["loginOK"] != true) {
                 return;
             }
         } else {
-        # Falls kein neues PW eingegeben wird ist das neuepw das alte
+            # Falls kein neues PW eingegeben wird ist das neuepw das alte
             $newpw = $hashedpw;
             $error = ($error or false);
         }
@@ -58,7 +58,7 @@ if ($_SESSION["loginOK"] != true) {
         $stmt->bind_param("sdds", $escaped_strasse, $escaped_hausnummer, $escaped_plz, $escaped_ort);
         $stmt->execute();
         $stmt->bind_result($idadresse);
-        
+
         # Falls neue Adresse noch nicht vorhanden --> erstellen
         if (!$stmt->fetch()) {
             $stmt->close();
@@ -81,9 +81,9 @@ if ($_SESSION["loginOK"] != true) {
                     $fileend = '.gif';
                 }
                 $img = $idUser . $fileend;
-                
+
                 move_uploaded_file($_FILES['avatarnew']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/blog/img/" . $img);
-                 $img = $idUser . $fileend;
+                $img = $idUser . $fileend;
                 move_uploaded_file($_FILES['upload']['tmp_name'], $_SERVER['CONTEXT_DOCUMENT_ROOT'] . "/blog/img/" . $img);
 
                 # Updaten des Avatars
