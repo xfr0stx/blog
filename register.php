@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Die register.php dien zur Registrierung des Benutzers im Blog. Es werden alle Felder, mit Ausnahme
+<!-- Die register.php dient zur Registrierung des Benutzers im Blog. Es werden alle Felder, mit Ausnahme
 des Avatars, benötigt. 
 
 @version final

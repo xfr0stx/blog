@@ -6,7 +6,7 @@
 
 -->
 <html>
-    <!--  Das Greündgerüst einer HTML-Datei ist immer wie folgt aufgebaut:
+    <!--  Das Grundgerüst einer HTML-Datei ist immer wie folgt aufgebaut:
     <!DOCTYPE html>
     Im Bereich DOCTYPE wird dem Internet-Browser mitgeteilt, 
     was er an Befehlen erwarten kann und an welchem Standard man sich bei der Erstellung der Seite gehalten hat.
@@ -41,13 +41,17 @@
         <!--form <form> erstellt ein Formular welches die E-Mail-Adresse und das Passwort des Benutzers abfragt
         dazu werden die eigentlichen "Input-Types" ausgewählt, die Größe des Feldes definiert und mit required 
         die Eingabe auf "Erforderlich" gesetzt. Nach dem Drücken des Buttons "submit" werden die Informationen
-        über die methode "POST" (verschicken) direkt an den Webserver gesendet und kann dort weiterverarbeitet werden-->
+        über die methode "POST" (verschicken) direkt an den Webserver gesendet und kann dort weiterverarbeitet werden
+        <div> leitet ein Blockelement ein, alles was zwischen <div> und </div> steht wird als Bereich interepretiert.
+        Dieser Bereich kann seperat angesprochen und verändert werden.-->
         <div id="login">
             <form action="./jobs/login.php" method="POST">
                 E-Mail: <input type="text" size="20" value="" placeholder ="Em@il" name="email" required><br><br>
                 Passwort: <input type="Password" size="20" value="" placeholder ="Passwort" name="passwort" required ><br>
                 <input type="submit" csvalue="Senden">
             </form> </div><br><br>
+        <!-- "<a id="abutton"" Gibt an das man ein Button unter einer ID erstellt, welche auch seperat bearbeitet werden kann
+        -->
         <a id="abutton" href="register.php">Registrieren</a><br>
 
 

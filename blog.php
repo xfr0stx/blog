@@ -24,23 +24,28 @@ if ($_SESSION["loginOK"] != true) {
 
             <?php
             include_once "db/dbcon.php";
-
+            # Es wird eine SELECT-Abfrage auf der Datenbank durchgeführt. Dazu wird zur Vereinfachung eine View verwendet.
+            # Das Ergebnis wird verwendet um den Blog darzustellen.
             $stmt = $con->prepare("SELECT ideintrag, titel, eintrag, eintragdatum, email, iduser, kommentare, iduser FROM v_kommentare;")
                     or die("<b>Prepare Error: </b>" . $con->error);
             $stmt->execute();
             $stmt->bind_result($ideintrag, $titel, $eintrag, $eintragdatum, $email, $iduser, $kommentare, $iduser);
-
+            # Es wird überprüft ob nicht der Gast angemeldet ist. Entsprechend wird der BLog formatiert und dargstellt
             if ($_SESSION['email'] != 'gast') {
+                # uuid wird genutzt um den eingeloggten User zu ermitteln und sein avatar im Blog darzustellen.
                 $uuid = $_SESSION['usersession'];
 
                 echo '<br>';
                 echo '<br>';
+                #Hier wird die Tabelle erstellt um den Blog zu formatieren.
                 echo '<table  border ="0" align="center" >';
                 echo '<td valign="top" >';
                  echo '<h2>-=Input=-</h2>';
+                 # Zeigt den aktuellen eingeloggten User an
                echo'  <hr style="background-color:grey;"noshade width="300" align="center"> ';
                               echo '<b><u>Sie sind angemeldet als:</u></b><br> ';
                 echo $_SESSION['email'];
+                #Zeigt den Avatar an falls vorhanden ansonsten das Default avatar
                 if (file_exists("img/" . $uuid . ".jpg")) {
                     echo "<p align='center'><img src='img/$uuid.jpg' class='avatar'></p>";
                 } elseif (file_exists("img/" . $uuid . ".gif")) {
@@ -48,6 +53,7 @@ if ($_SESSION["loginOK"] != true) {
                 } else {
                     echo "<p align='center'><img src='img/default.jpg' class='avatar'></p>";
                 }
+                #Tabelle wird angelegt 
                 echo '<table style="word-break:break-all;word-wrap:break-word" border="0" align="center" width="300">';
                 echo '<br><br>';
                 // es wird überprüft wer eingeloggt ist und dann entsprechend das blog ausgegeben

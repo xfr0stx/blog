@@ -45,9 +45,9 @@ if ($_SESSION["loginOK"] != true) {
             $stmt->bind_param("i", $_SESSION["usersession"]);
             $stmt->execute();
             $stmt->bind_result($idUser, $email, $geburtsdatum, $strasse, $hausnummer, $plz, $ort);
-//Bindet die Rückgabedaten des prepared statements in die Variable $stmt
+#Bindet die Rückgabedaten des prepared statements in die Variable $stmt
             if ($stmt->fetch()) {
-//Ausgabe der Variablen im Formular    
+#Ausgabe der Variablen im Formular    
                 print("
                         <form action='./jobs/updateuser_job.php' method='POST' enctype='multipart/form-data'>
         
