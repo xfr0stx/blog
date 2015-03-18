@@ -8,7 +8,6 @@ in die Datenbank via INSERT-Befehl zu schreiben
 -->
 
 <?php
-
 include_once "../db/dbcon.php";
 session_start();
 //Hier werden alle eingaben "escaped" das beudetet, dass Einträge abgesichert werden, bevor sie an die Datenbank übermittelt werden.
@@ -17,12 +16,14 @@ session_start();
 $escaped_titel = mysqli_real_escape_string($con, $_POST["titel"]);
 $escaped_eintrag = mysqli_real_escape_string($con, $_POST["eintrag"]);
 $usersession = $_SESSION['usersession'];
-
- $stmt = $con->prepare("INSERT INTO eintrag(titel,eintrag,eintragdatum,user_idUser) VALUES (?,?,NOW(),?)")
-                            or die("<b>Prepare Error: </b>" . $con->error);
-
-                    $stmt->bind_param("ssi", $escaped_titel,$escaped_eintrag,$usersession);
-                    $stmt->execute();
+# Der Insert Befehl wird genutzt um Titel,Eintrag,Eintragsdatum und fkid in der DB zu setzen. NOW() setzt das aktuelle Datum
+$stmt = $con->prepare("INSERT INTO eintrag(titel,eintrag,eintragdatum,user_idUser) VALUES (?,?,NOW(),?)")
+        or die("<b>Prepare Error: </b>" . $con->error);
+#bind_param setzt die Werte sein. Dabei muss der jeweilige Typ mitgegeben "ssi" s=String i=Interger
+$stmt->bind_param("ssi", $escaped_titel, $escaped_eintrag, $usersession);
+# Ausführen des Statements
+$stmt->execute();
+# Schließen des Statements
 $stmt->close();
 #$abfrage = mysqli_query($con, $sql);
 //Weiterleitung an blog.php

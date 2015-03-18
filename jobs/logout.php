@@ -1,5 +1,5 @@
 <!--  Die Session wird bei einem Logout aufgelöst.
-Zusätzlich wird die Session Variable zur Sicherheit "genullt"
+Zusätzlich wird alle  Session Variablen zur Sicherheit "genullt"
 -->
 <?php
 session_start();

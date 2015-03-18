@@ -1,18 +1,22 @@
+/*Formatierung der h1-Elemente*/
 h1 {
     font-size: 4em;
     text-align: center;
     text-shadow: 10px 11px 12px #cccccc;
 }
+/*Formatierung der h3-Elemente und Erweiterung der h1-Elemente*/
 h1, h3 {
     font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
     font-weight: bold;
 }
+/*Formatierung der h2-Elemente*/
 h2 {
     font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
     font-size: 3em;
     text-align: center;
     
 }
+/*Formatierungsvorlage des Body´s*/
 body {
     font-size: 62.5%; /* Resets 1em to 10px */
     font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
@@ -20,21 +24,23 @@ body {
     color: whitesmoke;
     text-align: Center;
 }
-
+/*focus ist ein Formularelement, welches die Einstellungen auf das aktuelle Element zieht*/
 input:focus, textarea:focus {
     background-color: #849BAD;
 }
-
+/*link wird in diesem Fall zur Färbung der unbesuchten Links eingesetzt*/
 a:link {
     color: gray;
 }
+/*link wird in diesem Fall zur Färbung der besuchten Links eingesetzt*/
 a:visited {
     color: gray;
 }
-
+/*hover ist ein ein Formularelement, welches in diesem Falle die Farbe der Links beim über streichen der Maus weiss färbt*/
 a:hover {
     color:whitesmoke; 
 }
+/*Definiert die Größe der angezeigten Avatare*/
 .avatar {
     max-width:80px;
     max-height:80px;
@@ -42,23 +48,25 @@ a:hover {
     min-height:80px;
 }
 
+/*Erzeugt eine Grafische Elementenbox um den Login-Bereich*/
 #login { 
             width: 20%;
             margin-left: auto;
             margin-right: auto;
             color: #5B496E;
-             border-color:#cccccc;
-             background: #E2E6E9;
-             border-style:solid;
-             text-align:center; 
-             border-radius:17px;
-             border-width:7px; 
-             font-size:20px; 
-             padding:30px;
-             box-shadow: 1px 0px 20px 0px rgba(42,42,42,.55);
-             text-shadow:1px 0px 0px rgba(42,42,42,.75); 
+            border-color:#cccccc;
+            background: #E2E6E9;
+            border-style:solid;
+            text-align:center; 
+            border-radius:17px;
+            border-width:7px; 
+            font-size:20px; 
+            padding:30px;
+            box-shadow: 1px 0px 20px 0px rgba(42,42,42,.55);
+            text-shadow:1px 0px 0px rgba(42,42,42,.75); 
 } 
 
+/*Erzeugt eine Grafische Elementenbox um den Registrieren-Link*/
 #abutton{
     	border : solid 1px #ffffff;
 	border-radius : 10px;
@@ -69,7 +77,7 @@ a:hover {
 	background-color : #d6d6d6;
         
 }
-
+/*Erzeugt eine Farbänderung der Grafischen Elementenbox des Registrieren-Links*/
 #abutton:hover{
     	border : solid 1px #ffffff;
 	border-radius : 10px;

@@ -20,6 +20,7 @@
         $userpass = $_POST["passwort"];
         $hashedpw = hash('sha512', $userpass);
         $escaped_geburtsdatum = mysqli_real_escape_string($con, $_POST["geburtsdatum"]);
+        #Wandelt das Datum in "mysql" Komformität um.
         $convertdate = implode("-", array_reverse(explode('.', $escaped_geburtsdatum)));
 
         $escaped_strasse = mysqli_real_escape_string($con, $_POST["strasse"]);
