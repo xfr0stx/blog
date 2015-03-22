@@ -33,6 +33,8 @@
         $avatar = false;
         $error = false;
         # Überprüfen ob ein Avatar it hochgeladen wird und speichern des größe und typ.
+        
+        ##########################
         if (isset($_FILES['upload']) && $_FILES['upload']["size"] > 0) {
             $size = $_FILES['upload']['size'];
             $type = $_FILES['upload']['type'];
@@ -58,13 +60,17 @@
                 $error = true;
             }
         }
+        ##########################
 
         // Benutzer schon vorhanden?
         $stmt = $con->prepare("SELECT email FROM user WHERE email=?");
         $stmt->bind_param("s", $escaped_email);
         $stmt->execute();
         $stmt->store_result();
+        ##########################
         $user_exists = ($stmt->num_rows() == 1);
+        ##########################
+        
         $stmt->free_result();
         $stmt->close();
         
@@ -102,7 +108,7 @@
             $idUser = $con->insert_id;
             $stmt->close();
             
-
+            ##########################
             #  Avatar hochladen und updaten
             if ($avatar) {
                 # Das Avatar bekommt den namen "iduser"."filetyp"
@@ -117,6 +123,8 @@
                 $stmt->execute();
                 $stmt->close();
             }
+            ##########################
+            
             print("Regestrierung erfolgreich!<br>");
         }
         ?>

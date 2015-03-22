@@ -43,8 +43,10 @@ if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {
         header("Location: ../blog.php");
     } else {
         $stmt->close();
+        ##########################
 # Falls die Logindaten nicht stimmen, übergabe einer "errorvariable" im header.
         header("Location: ../index.php?error");
+        ##########################
     }
 }
 ?>

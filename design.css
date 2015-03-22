@@ -36,7 +36,7 @@ a:link {
 a:visited {
     color: gray;
 }
-/*hover ist ein ein Formularelement, welches in diesem Falle die Farbe der Links beim über streichen der Maus weiss färbt*/
+/*hover ist ein ein Formularelement, welches in diesem Falle die Farbe der Links beim überstreichen der Maus weiss färbt*/
 a:hover {
     color:whitesmoke; 
 }

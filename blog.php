@@ -31,6 +31,8 @@ if ($_SESSION["loginOK"] != true) {
             $stmt->execute();
             $stmt->bind_result($ideintrag, $titel, $eintrag, $eintragdatum, $email, $iduser, $kommentare, $iduser);
             # Es wird überprüft ob nicht der Gast angemeldet ist. Entsprechend wird der BLog formatiert und dargstellt
+            
+            ##########################
             if ($_SESSION['email'] != 'gast') {
                 # uuid wird genutzt um den eingeloggten User zu ermitteln und sein avatar im Blog darzustellen.
                 $uuid = $_SESSION['usersession'];
@@ -89,10 +91,16 @@ if ($_SESSION["loginOK"] != true) {
                     echo '<div style="text-align: justify">';
                     echo '<h2>' . $titel . '</h2>';
                     // strototime Wandelt die Uhrzeit in das deutsche Datum - Zeitformat um.
+                    
+                    ##########################
                     echo '<p align="center">Posted am: ' . $datum_deutsch = date('d.m.Y H:i:s', strtotime($eintragdatum)) . '.</p>';
+                    ##########################
+                    
                     echo '<p align="center">von: ' . $email . '</p>';
 //                Falls die Datei im Ordner img/*.gif oder .jpg exististiert wird das Image/Avatar angezeigt und mithilfe von CSS (class)
 //                auf die bestimmte Größe formatiert. Ansonsten wird das default-Bild angezeigt.
+                    
+                    ##########################
                     if (file_exists("img/" . $iduser . ".jpg")) {
                         echo "<p align='center'><img src='img/$iduser.jpg' class='avatar'></p>";
                     } elseif (file_exists("img/" . $iduser . ".gif")) {
@@ -100,16 +108,25 @@ if ($_SESSION["loginOK"] != true) {
                     } else {
                         echo "<p align='center'><img src='img/default.jpg' class='avatar'></p>";
                     }
+                    
+                    ##########################
+                    
+                    
                     echo '<table style="word-break:break-all;word-wrap:break-word" border="0" align="center" width="300">';
 
                     echo '<tr><td bgcolor ="#E2E2E2" width ="300" valign="top"><FONT COLOR="#5B496E">' . $eintrag . '</td></tr>';
 //                Der ID des Eintrags wird in der Variable id (?id=) gespeichert. So kann später über GET die Variable abgefragt werden.
+                    
+                    ##########################
                     echo '<tr><td bgcolor="#A1B5C6" width ="300" align="right"><FONT COLOR="#5B496E">' . '<a href="kommentare.php?id=' . $ideintrag . '">Kommentare(' . $kommentare . ')</a>' . '</p></td></tr>';
-
+                    ##########################
+                    
                     echo '</table>';
                     echo '</div>';
                     echo '<hr noshade width="300" size="3" align="center">';
                 }
+                
+                ##########################
             } else {
                
                 echo '<b><u>Sie sind angemeldet als: Gast</u></b><br><br>';

@@ -27,11 +27,15 @@ if ($_SESSION["loginOK"] != true) {
                  Adressezeile (?error/2)). Anschließend wird der der entsprechende Fehlercode
                  zurückgegeben.-->
             <?php
+            
+            ##########################
             if (array_key_exists('error', $_GET)) {
                 print("Falsches Passwort eingegeben !");
             } elseif (array_key_exists('error2', $_GET)) {
                 print("Die beiden neuen Passwörter passen nicht!");
             }
+            
+            ##########################
             ?>
             <?php
             include_once "./db/dbcon.php";

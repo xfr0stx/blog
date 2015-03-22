@@ -56,12 +56,13 @@
 
 
         <?php
-        # Prüft den Wert in der URL ([..]?error) über $_GET (empfangen) und printed ggf. eine Meldung
-
+        #Prüft den Wert in der URL ([..]?error) über $_GET (empfangen) und printed ggf. eine Meldung
+        ##########################
         if (array_key_exists("error", $_GET)) {
             echo"<br>";
             echo "<b>Falsche email oder pw</b>";
         }
+        ##########################
         ?>
     </body>
 </html>
