@@ -39,7 +39,7 @@
             $size = $_FILES['upload']['size'];
             $type = $_FILES['upload']['type'];
 
-            $checked = false;
+            $check = false;
             
             # Überprüfen des Filetyps
             if ($type == 'image/jpeg') {
@@ -56,7 +56,7 @@
             if ($size < 102400 && $check == true) {
                 $avatar = true;
             } else {
-                print("<b>Dateigröße zu groß! <=100kb!</b>");
+                print("<b>Dateigröße zu groß (<=100kb!) oder falscher Dateityp (nur jpg oder gif)! </b>");
                 $error = true;
             }
         }
