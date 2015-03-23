@@ -30,7 +30,7 @@ des Avatars, benötigt.
                 <td  bgcolor="#E2E6E9" align="center">
                     <FONT COLOR="#5B496E">
                     <label for="email">Email</label><br />
-                    <input type="email" size="20" value="" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+                    <input type="email" size="20" value="" name="email"><br>
                     <label for="password">Passwort (min. 5 Zeichen)</label><br />
                     <input type="password" size="20" value="" name="passwort" pattern=".{5,}" required><br>
                     <label for="geburtsdatum">Geburtsdatum (dd.mm.yyyy)</label><br />
