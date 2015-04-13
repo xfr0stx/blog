@@ -29,18 +29,18 @@
         $escaped_ort = mysqli_real_escape_string($con, $_POST["ort"]);
 
 
-        // Avatar
+        # Avatar
         $avatar = false;
         $error = false;
         # Überprüfen ob ein Avatar it hochgeladen wird und speichern des größe und typ.
-        
-        ##########################
+
+
         if (isset($_FILES['upload']) && $_FILES['upload']["size"] > 0) {
             $size = $_FILES['upload']['size'];
             $type = $_FILES['upload']['type'];
 
             $check = false;
-            
+
             # Überprüfen des Filetyps
             if ($type == 'image/jpeg') {
 
@@ -60,27 +60,26 @@
                 $error = true;
             }
         }
-        ##########################
 
-        // Benutzer schon vorhanden?
+        # Benutzer schon vorhanden?
         $stmt = $con->prepare("SELECT email FROM user WHERE email=?");
         $stmt->bind_param("s", $escaped_email);
         $stmt->execute();
         $stmt->store_result();
-        ##########################
+
         $user_exists = ($stmt->num_rows() == 1);
-        ##########################
-        
+
+
         $stmt->free_result();
         $stmt->close();
-        
+
         # Falls der user existiert ($user_exists = ($stmt->num_rows() == 1)) ausgabe der Meldung und die
         # Error Variable auf true setzen.
         if ($user_exists) {
             print("<b>Schon vorhanden!</b>");
             $error = true;
         }
-        
+
         # Falls Error variable nicht true ist führe aus:
         if (!$error) {
 
@@ -99,7 +98,7 @@
             }
             $stmt->close();
 
-            
+
             # Benutzer hinzufügen
             $stmt = $con->prepare("INSERT INTO user(email,passwort,geburtsdatum,adresse_idadresse) VALUES (?,?,STR_TO_DATE(?,'%Y-%m-%d'),?)")
                     or die("<b>Prepare Error: </b>" . $con->error);
@@ -107,8 +106,8 @@
             $stmt->execute();
             $idUser = $con->insert_id;
             $stmt->close();
-            
-            ##########################
+
+
             #  Avatar hochladen und updaten
             if ($avatar) {
                 # Das Avatar bekommt den namen "iduser"."filetyp"
@@ -123,8 +122,8 @@
                 $stmt->execute();
                 $stmt->close();
             }
-            ##########################
-            
+
+
             print("Regestrierung erfolgreich!<br>");
         }
         ?>

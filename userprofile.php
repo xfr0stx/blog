@@ -27,31 +27,27 @@ if ($_SESSION["loginOK"] != true) {
                  Adressezeile (?error/2)). Anschließend wird der der entsprechende Fehlercode
                  zurückgegeben.-->
             <?php
-            
-            ##########################
+                      
             if (array_key_exists('error', $_GET)) {
                 print("Falsches Passwort eingegeben !");
             } elseif (array_key_exists('error2', $_GET)) {
                 print("Die beiden neuen Passwörter passen nicht!");
             }
-            
-            ##########################
+                      
             ?>
             <?php
             include_once "./db/dbcon.php";
 
-//            Prepared Statement -> verhindert SQL-Injections durch vorbereitete Anweisungen. Es enthält noch keine Parameterwerte,
-//            stattdessen werden Platzhalter (?) übergeben die mit bind_param() entsprechende gefüllt und mit execute() ausgeführt werden.
-//            Im Produktiven sollen Fehlermeldungen (die) vermieden werden. Da hierdurch "Hacker" wertvolle Informationen erhalten können.
-//            Das Ergebnis des Statements wird in den Variablen von bind_result() gespeichert.
+            
+            # Statement zum ermitteln der Benutzerdaten des angemeldeten Users. Besonderheit: Formatierung des Geburtsdatum nach d.m.y
             $stmt = $con->prepare("SELECT u.iduser,u.email,date_format(u.geburtsdatum, '%d.%m.%Y'), ad.strasse, ad.hausnummer, ad.plz, ad.ort FROM adresse ad INNER JOIN user u ON adresse_idadresse=idadresse WHERE iduser =?")
                     or die("<b>Prepare Error: </b>" . $this->con->error);
             $stmt->bind_param("i", $_SESSION["usersession"]);
             $stmt->execute();
             $stmt->bind_result($idUser, $email, $geburtsdatum, $strasse, $hausnummer, $plz, $ort);
-#Bindet die Rückgabedaten des prepared statements in die Variable $stmt
             if ($stmt->fetch()) {
-#Ausgabe der Variablen im Formular    
+                
+            # Ausgabe der Variablen im Formular    
                 print("
                         <form action='./jobs/updateuser_job.php' method='POST' enctype='multipart/form-data'>
         

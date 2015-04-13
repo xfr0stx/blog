@@ -1,4 +1,4 @@
-   <!--  login.php ist die Hilfedatei zum einloggen.
+<!--  login.php ist die Hilfedatei zum einloggen.
 Es wird eine Verbindung zur Datenbank aufgebaut und ein entsprechender User
 in der Datenbank gesucht. Falls der User in der Datenbank existiert wird er an den
 Blog weitergeleitet, ansonsten bleibt er auf der index.php. Der Gast-Benutzer kann
@@ -6,7 +6,7 @@ sich ebenfalls einloggen und wird dann auf die gast.php weitergeleitet.
 
 @version final
 @copyright none
- 
+
 -->
 <?php
 include_once ("../db/dbcon.php");
@@ -43,10 +43,9 @@ if (($_POST["email"] == "gast") && ($userpass = $_POST["passwort"] == "gast")) {
         header("Location: ../blog.php");
     } else {
         $stmt->close();
-        ##########################
+
 # Falls die Logindaten nicht stimmen, übergabe einer "errorvariable" im header.
         header("Location: ../index.php?error");
-        ##########################
     }
 }
 ?>

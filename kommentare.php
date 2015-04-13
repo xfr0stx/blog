@@ -31,7 +31,7 @@ if ($_SESSION["loginOK"] != true) {
             <a href="blog.php">Zurück zum Blog!</a>
             <?php
             include_once "db/dbcon.php";
-            #Prepared statement zur Abfrage der Kommentare in Bezug auf die Blogeinträge
+            # Prepared statement zur Abfrage der Kommentare in Bezug auf die Blogeinträge
             $stmt = $con->prepare("SELECT eintrag.titel, kommentar.kommentar,kommentar.datum, user.email FROM kommentar JOIN eintrag ON kommentar.eintrag_ideintrag = eintrag.ideintrag JOIN user ON kommentar.user_iduser = user.idUser WHERE ideintrag = ? ORDER BY kommentar.idanswere  DESC;")
                     or die("<b>Prepare Error: </b>" . $this->con->error);
             $stmt->bind_param("s", $_GET["id"]);
@@ -41,7 +41,7 @@ if ($_SESSION["loginOK"] != true) {
             echo '<br>';
             echo '<br>';
             while ($stmt->fetch()) {
-                #Ausgabe vom Kommentar, datum und email.
+                # Ausgabe vom Kommentar, datum und email.
                 echo '<div style="text-align: justify">';
                 echo '<p align="center">Posted am: ' . $datum_deutsch = date('d.m.Y H:i:s', strtotime($datum)) . '.</p>';
                 echo '<p align="center">von: ' . $email . '</p>';
